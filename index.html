@@ -1,63 +1,727 @@
-warning.classList.add("critical");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PayProof — Every payment. Proven.</title>
 
-        warning.innerHTML = `
-            <strong>Warning generated:</strong>
-            3 or more recorded payment delays.
-            A payment history report can be prepared
-            for further review.
-        `;
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,sans-serif;
+color:#fff;
+background:#080812;
+overflow-x:hidden;
+}
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 10%,#6741c755,transparent 30%),
+radial-gradient(circle at 85% 20%,#315ee044,transparent 28%),
+radial-gradient(circle at 50% 90%,#9b4dcc22,transparent 30%);
+pointer-events:none;
+}
+.container{width:min(1100px,92%);margin:auto}
+nav{
+position:sticky;top:0;z-index:10;
+background:#080812cc;
+backdrop-filter:blur(20px);
+border-bottom:1px solid #ffffff12;
+}
+.nav{
+height:70px;display:flex;align-items:center;
+justify-content:space-between
+}
+.logo{font-size:23px;font-weight:800}
+.logo span{color:#9d7cff}
+.links{display:flex;gap:25px;color:#aaa8bb;font-size:14px}
+.links a{text-decoration:none;color:inherit}
+.hero{
+min-height:650px;
+display:flex;align-items:center;
+}
+.hero-grid{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:50px;
+align-items:center;
+}
+.badge{
+display:inline-block;
+padding:8px 13px;
+border:1px solid #9878ff44;
+background:#9878ff12;
+border-radius:30px;
+color:#c7b8ff;
+font-size:12px;
+margin-bottom:25px;
+}
+h1{
+font-size:clamp(58px,9vw,100px);
+line-height:.9;
+letter-spacing:-6px;
+margin-bottom:28px;
+background:linear-gradient(100deg,#fff,#d8ceff,#9174ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.hero p,.desc{
+color:#a19eaf;
+font-size:18px;
+line-height:1.6;
+max-width:650px;
+}
+.buttons{display:flex;gap:12px;margin-top:30px}
+.btn{
+border:0;border-radius:12px;
+padding:14px 20px;
+font-weight:700;
+cursor:pointer;
+color:white;
+}
+.primary{
+background:linear-gradient(135deg,#805cff,#5f7dff);
+box-shadow:0 12px 35px #6d58ff33;
+}
+.secondary{
+background:#ffffff0a;
+border:1px solid #ffffff18;
+}
+.visual{height:400px;position:relative}
+.glow{
+position:absolute;width:250px;height:250px;
+background:#7651ff44;filter:blur(80px);
+top:70px;left:80px;
+}
+.float{
+position:absolute;
+padding:25px;
+background:#ffffff0b;
+border:1px solid #ffffff18;
+backdrop-filter:blur(20px);
+border-radius:22px;
+box-shadow:0 30px 70px #0008;
+}
+.card1{width:290px;top:30px;left:0;transform:rotate(-5deg)}
+.card2{width:260px;right:0;bottom:30px;transform:rotate(5deg)}
+.small{font-size:11px;color:#858293;margin-bottom:12px}
+.big{font-size:32px;font-weight:800;margin-bottom:16px}
+.row{
+display:flex;justify-content:space-between;
+color:#9895a7;font-size:12px
+}
+.ok{color:#a9d4bb}
+.purple{color:#b9a6ff}
 
-    } else {
-
-        warning.classList.remove("critical");
-
-        warning.innerHTML = `
-            <strong>Delay warning:</strong>
-            ${delays} recorded delays.
-            A warning is generated after the
-            third confirmed delay.
-        `;
-    }
-
-
-    amountInput.value = "";
-    lateInput.value = "";
-
-    showToast(
-        "✓ Payment of ₸" +
-        amount.toLocaleString("en-US") +
-        " recorded."
-    );
+section{padding:90px 0}
+.eyebrow{
+color:#967ce2;
+text-transform:uppercase;
+letter-spacing:2px;
+font-size:11px;
+font-weight:700;
+margin-bottom:15px;
+}
+h2{
+font-size:clamp(40px,6vw,65px);
+line-height:1;
+letter-spacing:-3px;
+margin-bottom:20px;
+}
+.cards,.steps{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
+margin-top:40px;
+}
+.card,.step{
+padding:28px;
+min-height:205px;
+background:#ffffff08;
+border:1px solid #ffffff12;
+border-radius:20px;
+}
+.num{
+color:#8870d8;
+font-size:27px;
+margin-bottom:35px;
+}
+.card h3,.step h3{
+font-size:21px;margin-bottom:10px
+}
+.card p,.step p{
+color:#898697;
+font-size:14px;
+line-height:1.55
 }
 
+.dashboard{
+margin-top:40px;
+padding:22px;
+background:#0d0d20e8;
+border:1px solid #ffffff15;
+border-radius:25px;
+box-shadow:0 30px 80px #0006;
+}
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+.employee{display:flex;align-items:center;gap:12px}
+.avatar{
+width:45px;height:45px;
+display:grid;place-items:center;
+border-radius:13px;
+background:linear-gradient(135deg,#8064dc,#607eff);
+font-weight:800;
+}
+.employee h3{font-size:16px}
+.employee p{font-size:11px;color:#7f7c8d;margin-top:3px}
+.status{
+font-size:11px;
+padding:8px 11px;
+border-radius:20px;
+background:#8d6aff12;
+border:1px solid #8d6aff33;
+color:#b8a6ff;
+}
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
+.stat{
+padding:20px;
+background:#ffffff07;border:1px solid #ffffff0c;
+border-radius:15px;
+}
+.stat small{display:block;color:#777486;margin-bottom:8px}
+.stat strong{font-size:25px}
+.history{
+margin-top:12px;
+padding:20px;
+background:#ffffff05;
+border-radius:15px;
+}
+.history-title{
+font-weight:700;
+margin-bottom:12px;
+}
+.payment{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+padding:13px 0;
+border-bottom:1px solid #ffffff0b;
+color:#aaa7b7;
+font-size:13px;
+}
+.paid{color:#9ed0b1}
+.delayed{color:#c0a3ff}
+.warning{
+margin-top:13px;
+padding:14px;
+border-radius:12px;
+background:#9563ff0e;
+border:1px solid #9563ff25;
+color:#bbb0d3;
+font-size:13px;
+line-height:1.5;
+}
+.critical{
+background:#b94c8114;
+border-color:#b94c8150;
+color:#e1adca;
+}
+.form{
+margin-top:13px;
+display:grid;
+grid-template-columns:1fr 1fr auto;
+gap:10px;
+}
+input{
+width:100%;
+padding:14px;
+border-radius:11px;
+border:1px solid #ffffff15;
+background:#0004;
+color:white;
+outline:none;
+}
+input:focus{border-color:#967aff}
+.solana-box{
+margin-top:40px;
+padding:35px;
+border-radius:23px;
+background:#ffffff07;
+border:1px solid #ffffff14;
+}
+.solana-box h3{font-size:30px;margin-bottom:12px}
+.solana-box p{
+color:#9d9aaa;
+line-height:1.6;
+max-width:720px;
+margin-bottom:20px;
+}
+.event{
+display:none;
+margin-top:18px;
+padding:15px;
+border-radius:12px;
+background:#8060ff12;
+border:1px solid #967aff33;
+}
+.event.show{display:block}
+.event strong{color:#c2b3ff}
+.event small{
+display:block;
+color:#858293;
+margin-top:6px;
+word-break:break-all;
+}
+.future{
+margin-top:40px;
+border-top:1px solid #ffffff12;
+}
+.future div{
+padding:20px 0;
+border-bottom:1px solid #ffffff12;
+font-size:18px;
+}
+.future span{color:#806bd0;margin-right:20px;font-size:12px}
+footer{
+padding:30px 0;
+border-top:1px solid #ffffff10;
+color:#777486;
+font-size:12px;
+}
+.footer{
+display:flex;
+justify-content:space-between;
+}
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translate(-50%,30px);
+opacity:0;
+background:#17152b;
+border:1px solid #9b7cff44;
+padding:14px 18px;
+border-radius:12px;
+z-index:99;
+transition:.3s;
+font-size:13px;
+}
+.toast.show{
+opacity:1;
+transform:translate(-50%,0);
+}
 
-function prepareSolana() {
+@media(max-width:800px){
+.links{display:none}
+.hero{padding:70px 0}
+.hero-grid{grid-template-columns:1fr}
+.visual{height:350px}
+.cards,.steps,.stats{grid-template-columns:1fr}
+.top{align-items:flex-start;flex-direction:column;gap:15px}
+.form{grid-template-columns:1fr}
+.payment{grid-template-columns:1fr 1fr}
+.payment span:last-child{grid-column:1/-1}
+.footer{flex-direction:column;gap:8px}
+}
+</style>
+</head>
 
-    const random =
-        Math.random()
-        .toString(36)
-        .substring(2, 10)
-        .toUpperCase();
+<body>
 
-    const eventId =
-        "PAYPROOF-" +
-        new Date().getFullYear() +
-        "-" +
-        random;
+<nav>
+<div class="container nav">
+<div class="logo">Pay<span>Proof</span></div>
+<div class="links">
+<a href="#problem">Problem</a>
+<a href="#product">Product</a>
+<a href="#how">How it works</a>
+<a href="#solana">Solana</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+<div class="badge">● Solana Create 2026 · MVP</div>
+
+<h1>Every payment.<br>Proven.</h1>
+
+<p>
+PayProof makes salary payments more transparent,
+structured and verifiable for employees and small businesses.
+</p>
+
+<div class="buttons">
+<a href="#product" class="btn primary">Explore MVP</a>
+<a href="#how" class="btn secondary">How it works</a>
+</div>
+</div>
+
+<div class="visual">
+<div class="glow"></div>
+
+<div class="float card1">
+<div class="small">PAYMENT RECORDED</div>
+<div class="big">₸150,000</div>
+<div class="row">
+<span>30 Sep 2026</span>
+<span class="ok">✓ Verified</span>
+</div>
+</div>
+
+<div class="float card2">
+<div class="small">PAYMENT HISTORY</div>
+<div class="big">3</div>
+<div class="row">
+<span>Payments</span>
+<span class="purple">Tracked</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
 
 
-    document.getElementById("eventId").textContent =
-        eventId;
+<section id="problem">
+<div class="container">
+
+<div class="eyebrow">The problem</div>
+<h2>Salary payments<br>need clarity.</h2>
+
+<p class="desc">
+Payment information can be scattered across messages,
+bank statements and personal records, making repeated
+delays difficult to track.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<div class="num">01</div>
+<h3>Scattered records</h3>
+<p>Payment information can exist in different places instead of one consistent history.</p>
+</div>
+
+<div class="card">
+<div class="num">02</div>
+<h3>Delayed payments</h3>
+<p>Repeated salary delays can become difficult to identify over time.</p>
+</div>
+
+<div class="card">
+<div class="num">03</div>
+<h3>Unclear history</h3>
+<p>Employees need a clear record of payments and payment timing.</p>
+</div>
+
+</div>
+</div>
+</section>
 
 
-    document
-        .getElementById("eventResult")
-        .classList.add("show");
+<section id="product">
+<div class="container">
+
+<div class="eyebrow">The product</div>
+<h2>One payment history.<br>One clear view.</h2>
+
+<p class="desc">
+A simple dashboard for recording payments,
+tracking delays and preparing verification events.
+</p>
+
+<div class="dashboard">
+
+<div class="top">
+<div class="employee">
+<div class="avatar">A</div>
+<div>
+<h3>Aidana</h3>
+<p>Employee · Small Business</p>
+</div>
+</div>
+
+<div class="status">● Payment history active</div>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>Monthly salary</small>
+<strong>₸150,000</strong>
+</div>
+
+<div class="stat">
+<small>Payments recorded</small>
+<strong id="count">3</strong>
+</div>
+
+<div class="stat">
+<small>Delays</small>
+<strong id="delays">2 / 3</strong>
+</div>
+
+</div>
 
 
-    showToast(
-        "✓ Demo event prepared for Solana Devnet."
-    );
+<div class="history">
+
+<div class="history-title">Payment history</div>
+
+<div id="history">
+
+<div class="payment">
+<span>30 Jul 2026</span>
+<span>₸150,000</span>
+<span class="paid">✓ Paid on time</span>
+</div>
+
+<div class="payment">
+<span>30 Aug 2026</span>
+<span>₸150,000</span>
+<span class="delayed">3-day delay</span>
+</div>
+
+<div class="payment">
+<span>30 Sep 2026</span>
+<span>₸150,000</span>
+<span class="delayed">5-day delay</span>
+</div>
+
+</div>
+
+<div id="warning" class="warning">
+<strong>Delay warning:</strong>
+2 recorded delays.
+A warning is generated after the third confirmed delay.
+</div>
+
+</div>
+
+
+<div class="history">
+
+<div class="history-title">Record a new payment</div>
+
+<div class="form">
+
+<input id="amount" type="number" placeholder="Payment amount (KZT)">
+
+<input id="late" type="number" min="0" placeholder="Days late">
+
+<button class="btn primary" onclick="recordPayment()">
+Record payment
+</button>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section id="how">
+<div class="container">
+
+<div class="eyebrow">How it works</div>
+<h2>Simple by design.</h2>
+
+<p class="desc">
+PayProof turns individual payment events into one structured history.
+</p>
+
+<div class="steps">
+
+<div class="step">
+<div class="num">01</div>
+<h3>Record</h3>
+<p>Add a salary payment, amount and payment timing.</p>
+</div>
+
+<div class="step">
+<div class="num">02</div>
+<h3>Track</h3>
+<p>Monitor payment history and repeated salary delays.</p>
+</div>
+
+<div class="step">
+<div class="num">03</div>
+<h3>Verify</h3>
+<p>Prepare payment events for future blockchain-based verification.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section id="solana">
+<div class="container">
+
+<div class="eyebrow">Blockchain layer</div>
+<h2>Verification,<br>not complexity.</h2>
+
+<div class="solana-box">
+
+<h3>Why Solana?</h3>
+
+<p>
+Solana can serve as a verification layer for payment events.
+In this MVP, we demonstrate preparation of a Devnet event
+rather than creating a live on-chain transaction.
+</p>
+
+<button class="btn primary" onclick="solana()">
+Prepare Solana event
+</button>
+
+<div id="event" class="event">
+<strong>✓ Demo event prepared</strong>
+<small id="eventId"></small>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section>
+<div class="container">
+
+<div class="eyebrow">Future development</div>
+<h2>From MVP to<br>real infrastructure.</h2>
+
+<p class="desc">
+The concept can grow into broader payment verification infrastructure.
+</p>
+
+<div class="future">
+<div><span>01</span>Payment system integrations</div>
+<div><span>02</span>Two-sided payment confirmation</div>
+<div><span>03</span>Real on-chain payment records</div>
+<div><span>04</span>Automated report generation</div>
+<div><span>05</span>Secure off-chain data storage</div>
+<div><span>06</span>Business analytics and insights</div>
+</div>
+
+</div>
+</section>
+
+
+<footer>
+<div class="container footer">
+<span>PayProof · Solana Create 2026</span>
+<span>Every payment. Proven.</span>
+</div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+
+<script>let paymentCount = 3;
+let delayCount = 2;
+
+function toast(text){
+const t=document.getElementById("toast");
+t.textContent=text;
+t.classList.add("show");
+setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+function recordPayment(){
+
+const amount=document.getElementById("amount").value;
+const late=document.getElementById("late").value;
+
+if(!amount || amount<=0){
+toast("Enter a payment amount.");
+return;
+}
+
+if(late===""){
+toast("Enter days late. Use 0 for on-time.");
+return;
+}
+
+paymentCount++;
+
+if(Number(late)>0) delayCount++;
+
+const row=document.createElement("div");
+row.className="payment";
+
+const date=new Date().toLocaleDateString("en-GB",{
+day:"2-digit",
+month:"short",
+year:"numeric"
+});
+
+row.innerHTML=`
+<span>${date}</span>
+<span>₸${Number(amount).toLocaleString("en-US")}</span>
+<span class="${Number(late)>0?"delayed":"paid"}">
+${Number(late)>0?late+"-day delay":"✓ Paid on time"}
+</span>
+`;
+
+document.getElementById("history").prepend(row);
+
+document.getElementById("count").textContent=paymentCount;
+document.getElementById("delays").textContent=delayCount+" / 3";
+
+const warning=document.getElementById("warning");
+
+if(delayCount>=3){
+warning.classList.add("critical");
+warning.innerHTML=`
+<strong>Warning generated:</strong>
+3 or more recorded payment delays.
+A payment history report can be prepared for further review.
+`;
+}else{
+warning.classList.remove("critical");
+warning.innerHTML=`
+<strong>Delay warning:</strong>
+${delayCount} recorded delays.
+A warning is generated after the third confirmed delay.
+`;
+}
+
+document.getElementById("amount").value="";
+document.getElementById("late").value="";
+
+toast("✓ Payment recorded successfully.");
+}
+
+function solana(){
+
+const id="PAYPROOF-2026-"+Math.random()
+.toString(36)
+.substring(2,10)
+.toUpperCase();
+
+document.getElementById("eventId").textContent=
+"Solana Devnet · Event ID: "+id;
+
+document.getElementById("event").classList.add("show");
+
+toast("✓ Demo event prepared for Solana Devnet.");
 }
 
 </script>
