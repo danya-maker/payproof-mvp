@@ -1,104 +1,240 @@
-</div>
+<div class="step">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <h3>Record</h3>
+
+            <p>
+              Add a salary payment and its date to the employee's
+              payment history.
+            </p>
+
+          </div>
 
 
-        <div class="future-item">
-          <span>05</span>
-          Secure off-chain data storage
+          <div class="step">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <h3>Track</h3>
+
+            <p>
+              Monitor payment history and identify repeated salary delays.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <h3>Verify</h3>
+
+            <p>
+              Prepare payment events for blockchain-based verification
+              using the Solana ecosystem.
+            </p>
+
+          </div>
+
         </div>
-
-
-        <div class="future-item">
-          <span>06</span>
-          Business analytics
-        </div>
-
 
       </div>
 
+    </section>
+
+
+    <!-- SOLANA -->
+
+    <section id="solana">
+
+      <div class="container">
+
+        <div class="section-label">
+          Blockchain layer
+        </div>
+
+        <h2>
+          Built with<br>
+          verification in mind.
+        </h2>
+
+
+        <div class="solana-box">
+
+          <h3>
+            Why Solana?
+          </h3>
+
+          <p>
+            Solana can provide a verification layer for payment events.
+            A future version of PayProof could store verifiable event
+            records on-chain while keeping detailed salary and personal
+            information securely off-chain.
+          </p>
+
+          <button
+            class="button button-primary"
+            onclick="showSolana()"
+          >
+            Prepare Solana event
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FUTURE -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-label">
+          What's next
+        </div>
+
+        <h2>
+          From MVP to<br>
+          real infrastructure.
+        </h2>
+
+        <p class="section-description">
+          PayProof can evolve into a more complete payment verification
+          platform for employees and businesses.
+        </p>
+
+
+        <div class="future-list">
+
+          <div class="future-item">
+            <span>01</span>
+            Payment system integrations
+          </div>
+
+
+          <div class="future-item">
+            <span>02</span>
+            Two-sided payment confirmation
+          </div>
+
+
+          <div class="future-item">
+            <span>03</span>
+            Real on-chain payment records
+          </div>
+
+
+          <div class="future-item">
+            <span>04</span>
+            Automated reports
+          </div>
+
+
+          <div class="future-item">
+            <span>05</span>
+            Secure off-chain data storage
+          </div>
+
+
+          <div class="future-item">
+            <span>06</span>
+            Business analytics
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        PayProof · Solana Create 2026
+      </span>
+
+      <span>
+        Every payment. Proven.
+      </span>
+
     </div>
 
-  </div>
-
-</section>
+  </footer>
 
 
-</main>
+  <div id="toast" class="toast"></div>
 
 
-<footer>
+  <script>
 
-  <div class="container footer-inner">
+    function showToast(message) {
 
-    <span>
-      PayProof · Solana Create 2026
-    </span>
+      const toast = document.getElementById("toast");
 
-    <span>
-      Every payment. Proven.
-    </span>
+      toast.textContent = message;
 
-  </div>
+      toast.classList.add("show");
 
-</footer>
+      setTimeout(function () {
+        toast.classList.remove("show");
+      }, 3000);
 
-
-<div id="toast" class="toast"></div>
+    }
 
 
-<script>
+    function recordPayment() {
 
-function showToast(message) {
+      const amountInput =
+        document.getElementById("amount");
 
-  const toast =
-    document.getElementById("toast");
+      const amount =
+        Number(amountInput.value);
 
-  toast.textContent = message;
+      if (!amount || amount <= 0) {
 
-  toast.classList.add("show");
+        showToast(
+          "Please enter a valid payment amount."
+        );
 
-  setTimeout(function() {
+        return;
+      }
 
-    toast.classList.remove("show");
+      showToast(
+        "✓ Payment of ₸" +
+        amount.toLocaleString("en-US") +
+        " recorded successfully."
+      );
 
-  }, 3000);
+      amountInput.value = "";
 
-}
-
-
-function recordPayment() {
-
-  const amount =
-    document.getElementById("amount").value;
-
-  if (!amount || amount <= 0) {
-
-    showToast(
-      "Please enter a valid payment amount."
-    );
-
-    return;
-
-  }
-
-  showToast(
-    "✓ Payment of ₸" +
-    Number(amount).toLocaleString() +
-    " recorded successfully."
-  );
-
-}
+    }
 
 
-function showSolana() {
+    function showSolana() {
 
-  showToast(
-    "✓ Demo event prepared for Solana Devnet · DEMO-PAYPROOF-2026"
-  );
+      showToast(
+        "✓ Demo event prepared for Solana Devnet · DEMO-PAYPROOF-2026"
+      );
 
-}
+    }
 
-</script>
-
+  </script>
 
 </body>
 </html>
