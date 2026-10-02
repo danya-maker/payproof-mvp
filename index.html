@@ -3,52 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PayProof — Every payment. Proven.</title>
+
+<title>PayProof — Transparent Payroll on Solana</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+html{
+scroll-behavior:smooth
+}
+
 body{
 font-family:Arial,sans-serif;
 color:#fff;
-background:#080812;
+background:#070711;
 overflow-x:hidden;
 }
+
 body:before{
 content:"";
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at 15% 10%,#6741c755,transparent 30%),
-radial-gradient(circle at 85% 20%,#315ee044,transparent 28%),
+radial-gradient(circle at 10% 10%,#6842d955,transparent 30%),
+radial-gradient(circle at 90% 20%,#315ee044,transparent 28%),
 radial-gradient(circle at 50% 90%,#9b4dcc22,transparent 30%);
 pointer-events:none;
+z-index:-1;
 }
-.container{width:min(1100px,92%);margin:auto}
+
+.container{
+width:min(1120px,92%);
+margin:auto;
+}
+
 nav{
-position:sticky;top:0;z-index:10;
-background:#080812cc;
+position:sticky;
+top:0;
+z-index:20;
+background:#080812dd;
 backdrop-filter:blur(20px);
 border-bottom:1px solid #ffffff12;
 }
+
 .nav{
-height:70px;display:flex;align-items:center;
-justify-content:space-between
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
-.logo{font-size:23px;font-weight:800}
-.logo span{color:#9d7cff}
-.links{display:flex;gap:25px;color:#aaa8bb;font-size:14px}
-.links a{text-decoration:none;color:inherit}
+
+.logo{
+font-size:23px;
+font-weight:800;
+}
+
+.logo span{
+color:#9d7cff;
+}
+
+.links{
+display:flex;
+gap:25px;
+color:#aaa8bb;
+font-size:14px;
+}
+
+.links a{
+text-decoration:none;
+color:inherit;
+}
+
 .hero{
-min-height:650px;
-display:flex;align-items:center;
-}
-.hero-grid{
-display:grid;
-grid-template-columns:1.1fr .9fr;
-gap:50px;
+min-height:720px;
+display:flex;
 align-items:center;
 }
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.08fr .92fr;
+gap:60px;
+align-items:center;
+}
+
 .badge{
 display:inline-block;
 padding:8px 13px;
@@ -59,43 +101,72 @@ color:#c7b8ff;
 font-size:12px;
 margin-bottom:25px;
 }
+
 h1{
-font-size:clamp(58px,9vw,100px);
-line-height:.9;
-letter-spacing:-6px;
+font-size:clamp(52px,8vw,92px);
+line-height:.92;
+letter-spacing:-5px;
 margin-bottom:28px;
-background:linear-gradient(100deg,#fff,#d8ceff,#9174ff);
+background:linear-gradient(
+100deg,
+#fff,
+#ded7ff,
+#9275ff
+);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-.hero p,.desc{
+
+.hero p,
+.desc{
 color:#a19eaf;
 font-size:18px;
-line-height:1.6;
-max-width:650px;
+line-height:1.65;
+max-width:700px;
 }
-.buttons{display:flex;gap:12px;margin-top:30px}
+
+.buttons{
+display:flex;
+gap:12px;
+margin-top:30px;
+}
+
 .btn{
-border:0;border-radius:12px;
+border:0;
+border-radius:12px;
 padding:14px 20px;
 font-weight:700;
 cursor:pointer;
 color:white;
+text-decoration:none;
+display:inline-block;
 }
+
 .primary{
 background:linear-gradient(135deg,#805cff,#5f7dff);
 box-shadow:0 12px 35px #6d58ff33;
 }
+
 .secondary{
 background:#ffffff0a;
 border:1px solid #ffffff18;
 }
-.visual{height:400px;position:relative}
-.glow{
-position:absolute;width:250px;height:250px;
-background:#7651ff44;filter:blur(80px);
-top:70px;left:80px;
+
+.visual{
+height:430px;
+position:relative;
 }
+
+.glow{
+position:absolute;
+width:280px;
+height:280px;
+background:#7651ff55;
+filter:blur(90px);
+top:70px;
+left:70px;
+}
+
 .float{
 position:absolute;
 padding:25px;
@@ -105,18 +176,56 @@ backdrop-filter:blur(20px);
 border-radius:22px;
 box-shadow:0 30px 70px #0008;
 }
-.card1{width:290px;top:30px;left:0;transform:rotate(-5deg)}
-.card2{width:260px;right:0;bottom:30px;transform:rotate(5deg)}
-.small{font-size:11px;color:#858293;margin-bottom:12px}
-.big{font-size:32px;font-weight:800;margin-bottom:16px}
-.row{
-display:flex;justify-content:space-between;
-color:#9895a7;font-size:12px
-}
-.ok{color:#a9d4bb}
-.purple{color:#b9a6ff}
 
-section{padding:90px 0}
+.card1{
+width:310px;
+top:35px;
+left:0;
+transform:rotate(-5deg);
+}
+
+.card2{
+width:280px;
+right:0;
+bottom:35px;
+transform:rotate(5deg);
+}
+
+.small{
+font-size:11px;
+color:#858293;
+margin-bottom:12px;
+}
+
+.big{
+font-size:32px;
+font-weight:800;
+margin-bottom:16px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+color:#9895a7;
+font-size:12px;
+}
+
+.ok{
+color:#a9d4bb;
+}
+
+.purple{
+color:#b9a6ff;
+}
+
+.sol{
+color:#a98aff;
+}
+
+section{
+padding:95px 0;
+}
+
 .eyebrow{
 color:#967ce2;
 text-transform:uppercase;
@@ -125,38 +234,51 @@ font-size:11px;
 font-weight:700;
 margin-bottom:15px;
 }
+
 h2{
 font-size:clamp(40px,6vw,65px);
 line-height:1;
 letter-spacing:-3px;
 margin-bottom:20px;
 }
-.cards,.steps{
+
+.cards,
+.steps{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:16px;
 margin-top:40px;
 }
-.card,.step{
+
+.card,
+.step{
 padding:28px;
 min-height:205px;
 background:#ffffff08;
 border:1px solid #ffffff12;
 border-radius:20px;
 }
+
 .num{
 color:#8870d8;
 font-size:27px;
 margin-bottom:35px;
 }
-.card h3,.step h3{
-font-size:21px;margin-bottom:10px
+
+.card h3,
+.step h3{
+font-size:21px;
+margin-bottom:10px;
 }
-.card p,.step p{
+
+.card p,
+.step p{
 color:#898697;
 font-size:14px;
-line-height:1.55
+line-height:1.55;
 }
+
+/* DASHBOARD */
 
 .dashboard{
 margin-top:40px;
@@ -166,22 +288,40 @@ border:1px solid #ffffff15;
 border-radius:25px;
 box-shadow:0 30px 80px #0006;
 }
+
 .top{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:18px;
 }
-.employee{display:flex;align-items:center;gap:12px}
+
+.employee{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
 .avatar{
-width:45px;height:45px;
-display:grid;place-items:center;
+width:45px;
+height:45px;
+display:grid;
+place-items:center;
 border-radius:13px;
 background:linear-gradient(135deg,#8064dc,#607eff);
 font-weight:800;
 }
-.employee h3{font-size:16px}
-.employee p{font-size:11px;color:#7f7c8d;margin-top:3px}
+
+.employee h3{
+font-size:16px;
+}
+
+.employee p{
+font-size:11px;
+color:#7f7c8d;
+margin-top:3px;
+}
+
 .status{
 font-size:11px;
 padding:8px 11px;
@@ -190,38 +330,72 @@ background:#8d6aff12;
 border:1px solid #8d6aff33;
 color:#b8a6ff;
 }
+
 .stats{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:12px;
 }
+
 .stat{
 padding:20px;
-background:#ffffff07;border:1px solid #ffffff0c;
+background:#ffffff07;
+border:1px solid #ffffff0c;
 border-radius:15px;
 }
-.stat small{display:block;color:#777486;margin-bottom:8px}
-.stat strong{font-size:25px}
+
+.stat small{
+display:block;
+color:#777486;
+margin-bottom:8px;
+}
+
+.stat strong{
+font-size:25px;
+}
+
+.stat .sub{
+display:block;
+font-size:11px;
+color:#777486;
+margin-top:7px;
+}
+
+/* HISTORY */
+
 .history{
 margin-top:12px;
 padding:20px;
 background:#ffffff05;
 border-radius:15px;
 }
+
 .history-title{
 font-weight:700;
 margin-bottom:12px;
 }
+
 .payment{
 display:grid;
-grid-template-columns:1fr 1fr 1fr;
+grid-template-columns:1fr 1fr 1fr 1fr;
 padding:13px 0;
 border-bottom:1px solid #ffffff0b;
 color:#aaa7b7;
 font-size:13px;
 }
-.paid{color:#9ed0b1}
-.delayed{color:#c0a3ff}
+
+.paid{
+color:#9ed0b1;
+}
+
+.delayed{
+color:#e3a9c8;
+}
+
+.chain{
+color:#a995ff;
+}
+
 .warning{
 margin-top:13px;
 padding:14px;
@@ -232,18 +406,24 @@ color:#bbb0d3;
 font-size:13px;
 line-height:1.5;
 }
+
 .critical{
 background:#b94c8114;
 border-color:#b94c8150;
 color:#e1adca;
 }
+
+/* FORM */
+
 .form{
 margin-top:13px;
 display:grid;
-grid-template-columns:1fr 1fr auto;
+grid-template-columns:1fr 1fr 1fr auto;
 gap:10px;
 }
-input{
+
+input,
+select{
 width:100%;
 padding:14px;
 border-radius:11px;
@@ -252,21 +432,188 @@ background:#0004;
 color:white;
 outline:none;
 }
-input:focus{border-color:#967aff}
+
+input:focus,
+select:focus{
+border-color:#967aff;
+}
+
+/* ANALYTICS */
+
+.analytics-grid{
+display:grid;
+grid-template-columns:1.4fr .6fr;
+gap:16px;
+margin-top:40px;
+}
+
+.chart-box,
+.wallet-box{
+padding:25px;
+background:#ffffff07;
+border:1px solid #ffffff12;
+border-radius:20px;
+}
+
+.chart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.chart-header h3{
+font-size:18px;
+}
+
+.chart-header span{
+font-size:11px;
+color:#8c8899;
+}
+
+.chart{
+height:260px;
+display:flex;
+align-items:flex-end;
+gap:20px;
+padding:20px 10px 0;
+border-bottom:1px solid #ffffff12;
+}
+
+.bar-wrap{
+height:100%;
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+align-items:center;
+gap:8px;
+}
+
+.bar{
+width:100%;
+max-width:55px;
+border-radius:9px 9px 2px 2px;
+background:linear-gradient(
+180deg,
+#9c7cff,
+#5944ba
+);
+box-shadow:0 0 25px #795fff33;
+transition:.5s;
+}
+
+.bar-label{
+font-size:10px;
+color:#777486;
+}
+
+.bar-value{
+font-size:10px;
+color:#b9adff;
+}
+
+/* WALLET */
+
+.wallet-box{
+position:relative;
+overflow:hidden;
+}
+
+.wallet-glow{
+position:absolute;
+width:150px;
+height:150px;
+right:-50px;
+top:-50px;
+background:#785cff44;
+filter:blur(50px);
+}
+
+.wallet-title{
+color:#888495;
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:1px;
+margin-bottom:10px;
+}
+
+.wallet-balance{
+font-size:34px;
+font-weight:800;
+margin-bottom:5px;
+}
+
+.wallet-kzt{
+color:#898697;
+font-size:13px;
+margin-bottom:25px;
+}
+
+.wallet-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #ffffff0c;
+font-size:13px;
+}
+
+.wallet-row span:first-child{
+color:#777486;
+}
+
+.wallet-row span:last-child{
+color:#d2caff;
+}
+
+/* SOLANA */
+
 .solana-box{
 margin-top:40px;
 padding:35px;
 border-radius:23px;
-background:#ffffff07;
+background:
+linear-gradient(
+135deg,
+#ffffff08,
+#8b65ff0a
+);
 border:1px solid #ffffff14;
 }
-.solana-box h3{font-size:30px;margin-bottom:12px}
+
+.solana-box h3{
+font-size:30px;
+margin-bottom:12px;
+}
+
 .solana-box p{
 color:#9d9aaa;
 line-height:1.6;
 max-width:720px;
 margin-bottom:20px;
 }
+
+.network{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:8px 12px;
+border-radius:20px;
+background:#8d6aff10;
+border:1px solid #8d6aff25;
+color:#b8a6ff;
+font-size:11px;
+margin-bottom:20px;
+}
+
+.network-dot{
+width:7px;
+height:7px;
+border-radius:50%;
+background:#8affbd;
+box-shadow:0 0 10px #8affbd;
+}
+
 .event{
 display:none;
 margin-top:18px;
@@ -275,34 +622,57 @@ border-radius:12px;
 background:#8060ff12;
 border:1px solid #967aff33;
 }
-.event.show{display:block}
-.event strong{color:#c2b3ff}
+
+.event.show{
+display:block;
+}
+
+.event strong{
+color:#c2b3ff;
+}
+
 .event small{
 display:block;
 color:#858293;
 margin-top:6px;
 word-break:break-all;
 }
+
+/* FUTURE */
+
 .future{
 margin-top:40px;
 border-top:1px solid #ffffff12;
 }
+
 .future div{
 padding:20px 0;
 border-bottom:1px solid #ffffff12;
 font-size:18px;
 }
-.future span{color:#806bd0;margin-right:20px;font-size:12px}
+
+.future span{
+color:#806bd0;
+margin-right:20px;
+font-size:12px;
+}
+
+/* FOOTER */
+
 footer{
 padding:30px 0;
 border-top:1px solid #ffffff10;
 color:#777486;
 font-size:12px;
 }
+
 .footer{
 display:flex;
 justify-content:space-between;
 }
+
+/* TOAST */
+
 .toast{
 position:fixed;
 bottom:25px;
@@ -317,213 +687,518 @@ z-index:99;
 transition:.3s;
 font-size:13px;
 }
+
 .toast.show{
 opacity:1;
 transform:translate(-50%,0);
 }
 
+/* MOBILE */
+
 @media(max-width:800px){
-.links{display:none}
-.hero{padding:70px 0}
-.hero-grid{grid-template-columns:1fr}
-.visual{height:350px}
-.cards,.steps,.stats{grid-template-columns:1fr}
-.top{align-items:flex-start;flex-direction:column;gap:15px}
-.form{grid-template-columns:1fr}
-.payment{grid-template-columns:1fr 1fr}
-.payment span:last-child{grid-column:1/-1}
-.footer{flex-direction:column;gap:8px}
+
+.links{
+display:none;
+}
+
+.hero{
+padding:70px 0;
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.visual{
+height:350px;
+}
+
+.cards,
+.steps,
+.stats,
+.analytics-grid{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.top{
+align-items:flex-start;
+flex-direction:column;
+gap:15px;
+}
+
+.form{
+grid-template-columns:1fr;
+}
+
+.payment{
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.payment span:last-child{
+grid-column:1/-1;
+}
+
+.footer{
+flex-direction:column;
+gap:8px;
+}
+
+h1{
+letter-spacing:-3px;
+}
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVIGATION -->
+
 <nav>
 <div class="container nav">
-<div class="logo">Pay<span>Proof</span></div>
+
+<div class="logo">
+Pay<span>Proof</span>
+</div>
+
 <div class="links">
 <a href="#problem">Problem</a>
-<a href="#product">Product</a>
-<a href="#how">How it works</a>
+<a href="#product">Dashboard</a>
+<a href="#analytics">Analytics</a>
 <a href="#solana">Solana</a>
 </div>
+
 </div>
 </nav>
 
+
+<!-- HERO -->
+
 <section class="hero">
+
 <div class="container hero-grid">
 
 <div>
-<div class="badge">● Solana Create 2026 · MVP</div>
 
-<h1>Every payment.<br>Proven.</h1>
+<div class="badge">
+● Blockchain Payroll Infrastructure · Solana
+</div>
+
+<h1>
+Transparent<br>
+Payroll.
+</h1>
 
 <p>
-PayProof makes salary payments more transparent,
-structured and verifiable for employees and small businesses.
+PayProof helps local businesses make salary payments
+transparent, track delays and create verifiable payment
+records using Solana blockchain infrastructure.
 </p>
 
 <div class="buttons">
-<a href="#product" class="btn primary">Explore MVP</a>
-<a href="#how" class="btn secondary">How it works</a>
-</div>
+
+<a href="#product" class="btn primary">
+Open payroll dashboard
+</a>
+
+<a href="#analytics" class="btn secondary">
+View analytics
+</a>
+
 </div>
 
+</div>
+
+
 <div class="visual">
+
 <div class="glow"></div>
 
 <div class="float card1">
-<div class="small">PAYMENT RECORDED</div>
-<div class="big">₸150,000</div>
+
+<div class="small">
+SALARY PAYMENT · SOLANA
+</div>
+
+<div class="big sol">
+2.18 SOL
+</div>
+
 <div class="row">
 <span>30 Sep 2026</span>
 <span class="ok">✓ Verified</span>
 </div>
+
 </div>
+
 
 <div class="float card2">
-<div class="small">PAYMENT HISTORY</div>
-<div class="big">3</div>
+
+<div class="small">
+PAYROLL WALLET
+</div>
+
+<div class="big">
+8.42 SOL
+</div>
+
 <div class="row">
-<span>Payments</span>
-<span class="purple">Tracked</span>
-</div>
-</div>
+<span>₸ equivalent</span>
+<span class="purple" id="heroKzt">
+≈ ₸1.1M
+</span>
 </div>
 
 </div>
+
+</div>
+
+</div>
+
 </section>
 
 
+<!-- PROBLEM -->
+
 <section id="problem">
+
 <div class="container">
 
-<div class="eyebrow">The problem</div>
-<h2>Salary payments<br>need clarity.</h2>
+<div class="eyebrow">
+The problem
+</div>
+
+<h2>
+Payroll should be<br>
+easy to verify.
+</h2>
 
 <p class="desc">
-Payment information can be scattered across messages,
-bank statements and personal records, making repeated
-delays difficult to track.
+For small businesses and local teams, salary information
+can be scattered across bank statements, chats and
+spreadsheets. PayProof turns each payment into one
+structured and transparent history.
 </p>
+
 
 <div class="cards">
 
 <div class="card">
+
 <div class="num">01</div>
-<h3>Scattered records</h3>
-<p>Payment information can exist in different places instead of one consistent history.</p>
+
+<h3>
+Scattered payments
+</h3>
+
+<p>
+Salary records can live in different systems,
+making the full payment history difficult to follow.
+</p>
+
 </div>
 
+
 <div class="card">
+
 <div class="num">02</div>
-<h3>Delayed payments</h3>
-<p>Repeated salary delays can become difficult to identify over time.</p>
+
+<h3>
+Hidden delays
+</h3>
+
+<p>
+Repeated payment delays can be difficult to identify
+when there is no unified payroll history.
+</p>
+
 </div>
+
 
 <div class="card">
+
 <div class="num">03</div>
-<h3>Unclear history</h3>
-<p>Employees need a clear record of payments and payment timing.</p>
+
+<h3>
+No verification layer
+</h3>
+
+<p>
+Payment events can be prepared for blockchain
+verification instead of relying only on internal records.
+</p>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 
+<!-- PRODUCT -->
+
 <section id="product">
+
 <div class="container">
 
-<div class="eyebrow">The product</div>
-<h2>One payment history.<br>One clear view.</h2>
+<div class="eyebrow">
+Payroll dashboard
+</div>
+
+<h2>
+One payment history.<br>
+One source of truth.
+</h2>
 
 <p class="desc">
-A simple dashboard for recording payments,
-tracking delays and preparing verification events.
+A simple accounting dashboard for recording salaries,
+tracking delays and monitoring blockchain-ready payment events.
 </p>
+
 
 <div class="dashboard">
 
 <div class="top">
+
 <div class="employee">
-<div class="avatar">A</div>
-<div>
-<h3>Aidana</h3>
-<p>Employee · Small Business</p>
-</div>
+
+<div class="avatar">
+A
 </div>
 
-<div class="status">● Payment history active</div>
+<div>
+
+<h3>
+Aidana
+</h3>
+
+<p>
+Employee · Local Business
+</p>
+
 </div>
+
+</div>
+
+
+<div class="status">
+● Payroll monitoring active
+</div>
+
+</div>
+
+
+<!-- STATS -->
 
 <div class="stats">
 
 <div class="stat">
-<small>Monthly salary</small>
-<strong>₸150,000</strong>
+
+<small>
+Monthly payroll
+</small>
+
+<strong id="totalPayroll">
+6.54 SOL
+</strong>
+
+<span class="sub" id="totalPayrollKzt">
+≈ ₸900,000
+</span>
+
 </div>
+
 
 <div class="stat">
-<small>Payments recorded</small>
-<strong id="count">3</strong>
+
+<small>
+Payments recorded
+</small>
+
+<strong id="count">
+3
+</strong>
+
+<span class="sub">
+Payment events
+</span>
+
 </div>
+
 
 <div class="stat">
-<small>Delays</small>
-<strong id="delays">2 / 3</strong>
-</div>
+
+<small>
+On-time payments
+</small>
+
+<strong id="onTime">
+1
+</strong>
+
+<span class="sub">
+33% of payments
+</span>
 
 </div>
 
+
+<div class="stat">
+
+<small>
+Delayed payments
+</small>
+
+<strong id="delays">
+2
+</strong>
+
+<span class="sub">
+Requires attention
+</span>
+
+</div>
+
+</div>
+
+
+<!-- PAYMENT HISTORY -->
 
 <div class="history">
 
-<div class="history-title">Payment history</div>
+<div class="history-title">
+Payment history
+</div>
+
 
 <div id="history">
 
-<div class="payment">
-<span>30 Jul 2026</span>
-<span>₸150,000</span>
-<span class="paid">✓ Paid on time</span>
-</div>
 
 <div class="payment">
-<span>30 Aug 2026</span>
-<span>₸150,000</span>
-<span class="delayed">3-day delay</span>
+
+<span>
+30 Jul 2026
+</span>
+
+<span>
+2.18 SOL
+</span>
+
+<span class="paid">
+✓ Paid on time
+</span>
+
+<span class="chain">
+On-chain ready
+</span>
+
 </div>
+
 
 <div class="payment">
-<span>30 Sep 2026</span>
-<span>₸150,000</span>
-<span class="delayed">5-day delay</span>
-</div>
+
+<span>
+30 Aug 2026
+</span>
+
+<span>
+2.18 SOL
+</span>
+
+<span class="delayed">
+3-day delay
+</span>
+
+<span class="chain">
+On-chain ready
+</span>
 
 </div>
+
+
+<div class="payment">
+
+<span>
+30 Sep 2026
+</span>
+
+<span>
+2.18 SOL
+</span>
+
+<span class="delayed">
+5-day delay
+</span>
+
+<span class="chain">
+On-chain ready
+</span>
+
+</div>
+
+
+</div>
+
 
 <div id="warning" class="warning">
-<strong>Delay warning:</strong>
-2 recorded delays.
-A warning is generated after the third confirmed delay.
-</div>
+
+<strong>
+⚠ Delay monitoring:
+</strong>
+
+2 payment delays detected.
+A critical payroll alert is generated after the third delay.
 
 </div>
 
+</div>
+
+
+<!-- ADD PAYMENT -->
 
 <div class="history">
 
-<div class="history-title">Record a new payment</div>
+<div class="history-title">
+Record a new salary payment
+</div>
+
 
 <div class="form">
 
-<input id="amount" type="number" placeholder="Payment amount (KZT)">
+<input
+id="amount"
+type="number"
+step="0.01"
+placeholder="Amount in SOL"
+>
 
-<input id="late" type="number" min="0" placeholder="Days late">
 
-<button class="btn primary" onclick="recordPayment()">
+<input
+id="late"
+type="number"
+min="0"
+placeholder="Days late"
+/>
+
+
+<input
+id="employeeName"
+type="text"
+placeholder="Employee name"
+/>
+
+
+<button
+class="btn primary"
+onclick="recordPayment()"
+>
 Record payment
 </button>
 
@@ -532,197 +1207,782 @@ Record payment
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 
-<section id="how">
+<!-- ANALYTICS -->
+
+<section id="analytics">
+
 <div class="container">
 
-<div class="eyebrow">How it works</div>
-<h2>Simple by design.</h2>
+<div class="eyebrow">
+Blockchain analytics
+</div>
+
+<h2>
+See the payroll.<br>
+Understand the data.
+</h2>
 
 <p class="desc">
-PayProof turns individual payment events into one structured history.
+Accounting teams can monitor payroll volume, payment timing
+and delayed salaries from one analytics dashboard.
 </p>
+
+
+<div class="analytics-grid">
+
+
+<!-- CHART -->
+
+<div class="chart-box">
+
+<div class="chart-header">
+
+<h3>
+Payroll volume
+</h3>
+
+<span>
+SOL · last 6 months
+</span>
+
+</div>
+
+
+<div class="chart" id="payrollChart">
+
+<div class="bar-wrap">
+
+<div class="bar-value">
+2.18
+</div>
+
+<div
+class="bar"
+style="height:45%"
+>
+</div>
+
+<div class="bar-label">
+May
+</div>
+
+</div>
+
+
+<div class="bar-wrap">
+
+<div class="bar-value">
+3.27
+</div>
+
+<div
+class="bar"
+style="height:62%"
+>
+</div>
+
+<div class="bar-label">
+Jun
+</div>
+
+</div>
+
+
+<div class="bar-wrap">
+
+<div class="bar-value">
+4.36
+</div>
+
+<div
+class="bar"
+style="height:75%"
+>
+</div>
+
+<div class="bar-label">
+Jul
+</div>
+
+</div>
+
+
+<div class="bar-wrap">
+
+<div class="bar-value">
+4.36
+</div>
+
+<div
+class="bar"
+style="height:75%"
+>
+</div>
+
+<div class="bar-label">
+Aug
+</div>
+
+</div>
+
+
+<div class="bar-wrap">
+
+<div class="bar-value">
+6.54
+</div>
+
+<div
+class="bar"
+style="height:100%"
+>
+</div>
+
+<div class="bar-label">
+Sep
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- WALLET -->
+
+<div class="wallet-box">
+
+<div class="wallet-glow"></div>
+
+<div class="wallet-title">
+Accounting blockchain wallet
+</div>
+
+<div class="wallet-balance">
+8.42 SOL
+</div>
+
+<div class="wallet-kzt" id="walletKzt">
+≈ ₸1,160,000
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Network
+</span>
+
+<span>
+Solana Devnet
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Payroll events
+</span>
+
+<span id="walletEvents">
+3
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Verified events
+</span>
+
+<span>
+3
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Delayed payments
+</span>
+
+<span id="walletDelays">
+2
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Status
+</span>
+
+<span>
+● Monitoring
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOW -->
+
+<section id="how">
+
+<div class="container">
+
+<div class="eyebrow">
+How it works
+</div>
+
+<h2>
+Record.<br>
+Track.<br>
+Verify.
+</h2>
+
+<p class="desc">
+PayProof connects everyday payroll management
+with a blockchain-ready verification layer.
+</p>
+
 
 <div class="steps">
 
 <div class="step">
-<div class="num">01</div>
-<h3>Record</h3>
-<p>Add a salary payment, amount and payment timing.</p>
+
+<div class="num">
+01
 </div>
+
+<h3>
+Record
+</h3>
+
+<p>
+The accountant records the salary amount,
+employee and payment timing.
+</p>
+
+</div>
+
 
 <div class="step">
-<div class="num">02</div>
-<h3>Track</h3>
-<p>Monitor payment history and repeated salary delays.</p>
+
+<div class="num">
+02
 </div>
+
+<h3>
+Track
+</h3>
+
+<p>
+The dashboard monitors payment history
+and automatically highlights delays.
+</p>
+
+</div>
+
 
 <div class="step">
-<div class="num">03</div>
-<h3>Verify</h3>
-<p>Prepare payment events for future blockchain-based verification.</p>
+
+<div class="num">
+03
+</div>
+
+<h3>
+Verify
+</h3>
+
+<p>
+The payment event can be prepared for
+future on-chain verification on Solana.
+</p>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 
+<!-- SOLANA -->
+
 <section id="solana">
+
 <div class="container">
 
-<div class="eyebrow">Blockchain layer</div>
-<h2>Verification,<br>not complexity.</h2>
+<div class="eyebrow">
+Blockchain layer
+</div>
+
+<h2>
+Built around<br>
+Solana.
+</h2>
+
 
 <div class="solana-box">
 
-<h3>Why Solana?</h3>
+<div class="network">
+
+<div class="network-dot"></div>
+
+Solana Devnet · Demo environment
+
+</div>
+
+
+<h3>
+Payment verification layer
+</h3>
 
 <p>
-Solana can serve as a verification layer for payment events.
-In this MVP, we demonstrate preparation of a Devnet event
-rather than creating a live on-chain transaction.
+Each salary payment becomes a structured payment event.
+The MVP prepares these events for Solana verification,
+while the accounting dashboard keeps the human-readable
+history for employees and businesses.
 </p>
 
-<button class="btn primary" onclick="solana()">
-Prepare Solana event
+
+<button
+class="btn primary"
+onclick="solana()"
+>
+Prepare blockchain event
 </button>
 
+
 <div id="event" class="event">
-<strong>✓ Demo event prepared</strong>
-<small id="eventId"></small>
+
+<strong>
+✓ Blockchain event prepared
+</strong>
+
+<small id="eventId">
+</small>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
+
+<!-- FUTURE -->
 
 <section>
+
 <div class="container">
 
-<div class="eyebrow">Future development</div>
-<h2>From MVP to<br>real infrastructure.</h2>
+<div class="eyebrow">
+Future infrastructure
+</div>
+
+<h2>
+From payroll<br>
+to financial infrastructure.
+</h2>
 
 <p class="desc">
-The concept can grow into broader payment verification infrastructure.
+The MVP can evolve into a complete payroll verification
+system for local businesses and accounting teams.
 </p>
 
+
 <div class="future">
-<div><span>01</span>Payment system integrations</div>
-<div><span>02</span>Two-sided payment confirmation</div>
-<div><span>03</span>Real on-chain payment records</div>
-<div><span>04</span>Automated report generation</div>
-<div><span>05</span>Secure off-chain data storage</div>
-<div><span>06</span>Business analytics and insights</div>
+
+<div>
+<span>01</span>
+Real Solana wallet integration
+</div>
+
+<div>
+<span>02</span>
+Phantom wallet connection
+</div>
+
+<div>
+<span>03</span>
+Real on-chain payment records
+</div>
+
+<div>
+<span>04</span>
+Two-sided employee confirmation
+</div>
+
+<div>
+<span>05</span>
+Automated payroll reports
+</div>
+
+<div>
+<span>06</span>
+Blockchain accounting analytics
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
+<!-- FOOTER -->
+
 <footer>
+
 <div class="container footer">
-<span>PayProof · Solana Create 2026</span>
-<span>Every payment. Proven.</span>
+
+<span>
+PayProof · Transparent Payroll Infrastructure
+</span>
+
+<span>
+Solana · Every payment. Proven.
+</span>
+
 </div>
+
 </footer>
 
-<div id="toast" class="toast"></div>
+
+<div
+id="toast"
+class="toast"
+>
+</div>
 
 
-<script>let paymentCount = 3;
+<script>
+
+/* =========================
+   PAYPROOF MVP LOGIC
+========================= */
+
+const SOL_TO_KZT = 138000;
+
+let paymentCount = 3;
 let delayCount = 2;
+let onTimeCount = 1;
+let totalSol = 6.54;
+
+
+/* =========================
+   TOAST
+========================= */
 
 function toast(text){
-const t=document.getElementById("toast");
-t.textContent=text;
+
+const t = document.getElementById("toast");
+
+t.textContent = text;
+
 t.classList.add("show");
-setTimeout(()=>t.classList.remove("show"),2500);
+
+setTimeout(() => {
+t.classList.remove("show");
+},2500);
+
 }
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function formatKzt(value){
+
+return "₸" +
+Math.round(value)
+.toLocaleString("en-US");
+
+}
+
+
+/* =========================
+   UPDATE ANALYTICS
+========================= */
+
+function updateAnalytics(){
+
+const totalKzt = totalSol * SOL_TO_KZT;
+
+document.getElementById("totalPayroll")
+.textContent =
+totalSol.toFixed(2) + " SOL";
+
+document.getElementById("totalPayrollKzt")
+.textContent =
+"≈ " + formatKzt(totalKzt);
+
+document.getElementById("count")
+.textContent =
+paymentCount;
+
+document.getElementById("onTime")
+.textContent =
+onTimeCount;
+
+document.getElementById("delays")
+.textContent =
+delayCount;
+
+document.getElementById("walletEvents")
+.textContent =
+paymentCount;
+
+document.getElementById("walletDelays")
+.textContent =
+delayCount;
+
+document.getElementById("walletKzt")
+.textContent =
+"≈ " + formatKzt(8.42 * SOL_TO_KZT);
+
+document.getElementById("heroKzt")
+textContent =
+"≈ " + formatKzt(8.42 * SOL_TO_KZT);
+
+}
+
+
+/* =========================
+   RECORD PAYMENT
+========================= */
 
 function recordPayment(){
 
-const amount=document.getElementById("amount").value;
-const late=document.getElementById("late").value;
+const amount =
+Number(document.getElementById("amount").value);
 
-if(!amount || amount<=0){
-toast("Enter a payment amount.");
+const late =
+document.getElementById("late").value;
+
+const employee =
+document.getElementById("employeeName").value
+.trim() || "Employee";
+
+
+if(!amount || amount <= 0){
+
+toast("Enter a payment amount in SOL.");
+
 return;
+
 }
 
-if(late===""){
+
+if(late === ""){
+
 toast("Enter days late. Use 0 for on-time.");
+
 return;
+
 }
+
+
+const daysLate =
+Number(late);
+
 
 paymentCount++;
 
-if(Number(late)>0) delayCount++;
+totalSol += amount;
 
-const row=document.createElement("div");
-row.className="payment";
 
-const date=new Date().toLocaleDateString("en-GB",{
+if(daysLate > 0){
+
+delayCount++;
+
+}else{
+
+onTimeCount++;
+
+}
+
+
+/* CREATE HISTORY ROW */
+
+const row =
+document.createElement("div");
+
+row.className =
+"payment";
+
+
+const date =
+new Date().toLocaleDateString(
+"en-GB",
+{
 day:"2-digit",
 month:"short",
 year:"numeric"
-});
+}
+);
 
-row.innerHTML=`
-<span>${date}</span>
-<span>₸${Number(amount).toLocaleString("en-US")}</span>
-<span class="${Number(late)>0?"delayed":"paid"}">
-${Number(late)>0?late+"-day delay":"✓ Paid on time"}
+
+row.innerHTML = `
+
+<span>
+${date}
 </span>
+
+<span>
+${amount.toFixed(2)} SOL
+</span>
+
+<span class="${
+daysLate > 0
+? "delayed"
+: "paid"
+}">
+
+${
+daysLate > 0
+? daysLate + "-day delay"
+: "✓ Paid on time"
+}
+
+</span>
+
+<span class="chain">
+Blockchain ready
+</span>
+
 `;
 
-document.getElementById("history").prepend(row);
 
-document.getElementById("count").textContent=paymentCount;
-document.getElementById("delays").textContent=delayCount+" / 3";
+document
+.getElementById("history")
+.prepend(row);
 
-const warning=document.getElementById("warning");
 
-if(delayCount>=3){
+/* UPDATE */
+
+updateAnalytics();
+
+
+/* WARNING */
+
+const warning =
+document.getElementById("warning");
+
+
+if(delayCount >= 3){
+
 warning.classList.add("critical");
-warning.innerHTML=`
-<strong>Warning generated:</strong>
-3 or more recorded payment delays.
-A payment history report can be prepared for further review.
+
+warning.innerHTML = `
+
+<strong>
+⚠ Critical payroll alert:
+</strong>
+
+${delayCount} payment delays detected.
+Further review is recommended.
+
 `;
+
 }else{
+
 warning.classList.remove("critical");
-warning.innerHTML=`
-<strong>Delay warning:</strong>
-${delayCount} recorded delays.
-A warning is generated after the third confirmed delay.
+
+warning.innerHTML = `
+
+<strong>
+⚠ Delay monitoring:
+</strong>
+
+${delayCount} payment delays detected.
+A critical alert is generated after the third delay.
+
 `;
+
 }
 
-document.getElementById("amount").value="";
-document.getElementById("late").value="";
 
-toast("✓ Payment recorded successfully.");
+/* RESET */
+
+document.getElementById("amount").value = "";
+
+document.getElementById("late").value = "";
+
+document.getElementById("employeeName").value = "";
+
+
+toast(
+"✓ " +
+employee +
+" payment recorded."
+);
+
 }
+
+
+/* =========================
+   SOLANA EVENT
+========================= */
 
 function solana(){
 
-const id="PAYPROOF-2026-"+Math.random()
-.toString(36)
-.substring(2,10)
-.toUpperCase();
+const id =
+"PAYPROOF-" +
+Date.now().toString(36).toUpperCase();
 
-document.getElementById("eventId").textContent=
-"Solana Devnet · Event ID: "+id;
 
-document.getElementById("event").classList.add("show");
+document.getElementById("eventId")
+.textContent =
+"Solana Devnet · Demo Event ID: " + id;
 
-toast("✓ Demo event prepared for Solana Devnet.");
+
+document
+.getElementById("event")
+.classList
+.add("show");
+
+
+toast(
+"✓ Blockchain event prepared."
+);
+
 }
+
+
+/* =========================
+   INITIAL ANALYTICS
+========================= */
+
+updateAnalytics();
 
 </script>
 
