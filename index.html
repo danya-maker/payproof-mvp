@@ -1,94 +1,108 @@
-<td><span class="status paid">✓ Выплачено</span></td>
-    </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <tr>
-      <td>30.08.2026</td>
-      <td>150 000 ₸</td>
-      <td><span class="status late">⚠ Просрочка 3 дня</span></td>
-    </tr>
+<title>PayProof — Payment Transparency</title>
 
-    <tr>
-      <td>30.09.2026</td>
-      <td>150 000 ₸</td>
-      <td><span class="status late">⚠ Просрочка 5 дней</span></td>
-    </tr>
-  </table>
-</div>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
-<div class="card">
-  <h2 class="section-title">Зафиксировать выплату</h2>
-
-  <div class="form-grid">
-    <div>
-      <label>Сумма</label>
-      <input id="amount" value="150000">
-    </div>
-
-    <div>
-      <label>Комментарий</label>
-      <input id="comment" value="Зарплата за сентябрь 2026">
-    </div>
-  </div>
-
-  <button onclick="recordPayment()">Зафиксировать выплату</button>
-
-  <div class="result" id="result"></div>
-</div>
-
-<div class="card warning-box">
-  <div class="warning-icon">⚠</div>
-
-  <div>
-    <div class="label">Контроль просрочек</div>
-    <div>
-      Зафиксировано <b>2 случая</b> просрочки.
-      При третьей система сформирует предупреждение и отчёт.
-    </div>
-  </div>
-</div>
-
-<div class="card solana">
-  <div class="label">BLOCKCHAIN VERIFICATION</div>
-  <h2 class="section-title">Проверка события в Solana</h2>
-
-  <p>
-    Ключевые события выплат могут фиксироваться
-    в Solana для создания проверяемой истории.
-  </p>
-
-  <button onclick="showSolana()">Проверить blockchain-запись</button>
-
-  <p id="solana"></p>
-</div>
-
-</main>
-
-<footer>
-  PayProof · MVP · Solana Create 2026
-</footer>
-
-<script>
-
-function recordPayment(){
-
-  const amount = document.getElementById("amount").value;
-  const comment = document.getElementById("comment").value;
-
-  document.getElementById("result").innerHTML =
-    "✓ Выплата " + amount + " ₸ зафиксирована.<br>" +
-    "Комментарий: " + comment;
+* {
+  box-sizing: border-box;
 }
 
-function showSolana(){
-
-  document.getElementById("solana").innerHTML =
-    "✓ Demo-запись подготовлена для Solana Devnet.<br>" +
-    "Transaction ID: DEMO-PAYPROOF-2026";
+html {
+  scroll-behavior: smooth;
 }
 
-</script>
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(185,170,255,.12), transparent 35%),
+    #11131d;
+  color: #f4f2fa;
+  font-family: "DM Sans", Arial, sans-serif;
+  min-height: 100vh;
+}
 
-</body>
-</html>
-</body>
+.container {
+  width: min(1080px, calc(100% - 36px));
+  margin: auto;
+}
+
+/* HEADER */
+
+header {
+  padding: 25px 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: #b9a8ff;
+}
+
+.nav-status {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #aaa8b8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #baff9a;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(186,255,154,.7);
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 72px 0 55px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.eyebrow {
+  color: #aaa7bd;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-size: clamp(52px, 9vw, 96px);
+  line-height: .92;
+  letter-spacing: -5px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.hero h1 .accent {
+  color: #b9a8ff;
+}
+
+.hero p {
+  max-width: 570px;
+  margin: 30px auto 0;
+  color: #aaa9b8;
+  font-size: 17
 </html>
