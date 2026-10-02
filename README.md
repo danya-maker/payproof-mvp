@@ -1,1 +1,0 @@
-# payproof-mvp
