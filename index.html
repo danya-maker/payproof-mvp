@@ -1,61 +1,331 @@
-PayProof · MVP · Solana Create 2026
+6;
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 45px 20px 20px;
+
+  color: #92929a;
+  font-size: 12px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+  body {
+    padding: 25px 14px;
+  }
+
+  h1 {
+    font-size: 45px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 21px;
+    border-radius: 20px;
+  }
+
+  th,
+  td {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+  <div class="logo">
+    PAYPROOF
+  </div>
+
+  <h1>Every payment.<br>Proven.</h1>
+
+  <p class="subtitle">
+    Transparent payment records between employers
+    and employees — simple, traceable and verifiable.
+  </p>
+
+</div>
+
+
+<!-- EMPLOYEE OVERVIEW -->
+
+<div class="card">
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Employee
+      </div>
+
+      <b>Aidana</b>
+
     </div>
 
-    <div>
-      Payment transparency for small businesses.
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Monthly salary
+      </div>
+
+      <b>₸150,000</b>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Payment delays
+      </div>
+
+      <b id="counter">2 / 3</b>
+
     </div>
 
   </div>
 
-</footer>
+</div>
 
 
-<div id="toast" class="toast"></div>
+<!-- PAYMENT HISTORY -->
+
+<div class="card">
+
+  <h2>Payment history</h2>
+
+  <p class="muted">
+    A clear timeline of recorded salary payments.
+  </p>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <tr>
+
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+
+      </tr>
+
+
+      <tr>
+
+        <td>30.07.2026</td>
+
+        <td>₸150,000</td>
+
+        <td class="ok">
+          ✓ Paid
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>30.08.2026</td>
+
+        <td>₸150,000</td>
+
+        <td class="warning">
+          ⚠ 3-day delay
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>30.09.2026</td>
+
+        <td>₸150,000</td>
+
+        <td class="warning">
+          ⚠ 5-day delay
+        </td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<!-- RECORD PAYMENT -->
+
+<div class="card">
+
+  <h2>Record a payment</h2>
+
+  <p class="muted">
+    Add a new salary payment to the employee's history.
+  </p>
+
+
+  <label>
+    Amount
+  </label>
+
+  <input
+    id="amount"
+    value="150000"
+  >
+
+
+  <label>
+    Comment
+  </label>
+
+  <input
+    id="comment"
+    value="Salary for September 2026"
+  >
+
+
+  <button onclick="recordPayment()">
+    Record payment
+  </button>
+
+
+  <div
+    id="result"
+    style="display:none;"
+    class="result"
+  ></div>
+
+</div>
+
+
+<!-- DELAY CONTROL -->
+
+<div class="card">
+
+  <h2>Delay monitoring</h2>
+
+  <div class="warning-box">
+
+    <p class="warning">
+      ⚠ 2 payment delays have been recorded.
+    </p>
+
+    <p class="muted">
+      After a third confirmed delay, PayProof
+      generates a warning and payment history report.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- SOLANA -->
+
+<div class="card solana-card">
+
+  <h2>Solana verification</h2>
+
+  <p class="muted">
+
+    Key payment events can be prepared for
+    blockchain-based verification through
+    Solana Devnet.
+
+  </p>
+
+
+  <button onclick="showSolana()">
+    Check blockchain record
+  </button>
+
+
+  <div
+    id="solana"
+    class="solana-id"
+    style="display:none;"
+  ></div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+  PayProof · MVP · Solana Create 2026
+
+</div>
+
+
+</div>
 
 
 <script>
 
-function showToast(message) {
-
-  const toast = document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2800);
-
-}
-
-
 function recordPayment() {
 
   const amount =
-    document.getElementById("paymentAmount").value;
+    document.getElementById("amount").value;
 
-  if (!amount || amount <= 0) {
+  const comment =
+    document.getElementById("comment").value;
 
-    showToast("Please enter a valid payment amount.");
+  const result =
+    document.getElementById("result");
 
-    return;
+  result.style.display = "block";
 
-  }
-
-  showToast(
-    "Payment recorded successfully · ₸" +
-    Number(amount).toLocaleString()
-  );
+  result.innerHTML =
+    "✓ Payment of ₸" +
+    Number(amount).toLocaleString() +
+    " recorded successfully.<br>" +
+    "Comment: " +
+    comment;
 
 }
 
 
-function verifySolana() {
+function showSolana() {
 
-  showToast(
-    "Demo verification prepared for Solana Devnet · DEMO-PAYPROOF-2026"
-  );
+  const solana =
+    document.getElementById("solana");
+
+  solana.style.display = "block";
+
+  solana.innerHTML =
+    "✓ Event prepared for Solana Devnet verification." +
+    "<br><br>" +
+    "<strong>Demo Transaction ID:</strong> " +
+    "DEMO-PAYPROOF-2026";
 
 }
 
