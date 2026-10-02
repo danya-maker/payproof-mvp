@@ -1,48 +1,62 @@
-</div>
+PayProof · MVP · Solana Create 2026
+    </div>
 
-
-      <div class="future-small">
-
-        <h4>Smart reports</h4>
-
-        <p>
-          Turn payment history into clear, exportable reports.
-        </p>
-
-      </div>
-
+    <div>
+      Payment transparency for small businesses.
     </div>
 
   </div>
 
-</section>
-
-
-<footer>
-  PAYPROOF · MVP · SOLANA CREATE 2026
 </footer>
 
-</div>
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
+function showToast(message) {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2800);
+
+}
+
+
 function recordPayment() {
 
-  var amount = document.getElementById("amount").value;
-  var comment = document.getElementById("comment").value;
+  const amount =
+    document.getElementById("paymentAmount").value;
 
-  document.getElementById("result").innerHTML =
-    "✓ Payment of " + amount + " ₸ recorded.<br>" +
-    "Comment: " + comment;
+  if (!amount || amount <= 0) {
+
+    showToast("Please enter a valid payment amount.");
+
+    return;
+
+  }
+
+  showToast(
+    "Payment recorded successfully · ₸" +
+    Number(amount).toLocaleString()
+  );
+
 }
 
 
 function verifySolana() {
 
-  document.getElementById("solana").innerHTML =
-    "✓ Demo record prepared for Solana Devnet.<br>" +
-    "Transaction ID: DEMO-PAYPROOF-2026";
+  showToast(
+    "Demo verification prepared for Solana Devnet · DEMO-PAYPROOF-2026"
+  );
+
 }
 
 </script>
