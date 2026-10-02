@@ -1,176 +1,66 @@
-Blockchain layer
-      </div>
+warning.classList.add("critical");
 
-      <h2>
-        Built with<br>
-        verification in mind.
-      </h2>
+        warning.innerHTML = `
+            <strong>Warning generated:</strong>
+            3 or more recorded payment delays.
+            A payment history report can be prepared
+            for further review.
+        `;
 
+    } else {
 
-      <div class="solana">
+        warning.classList.remove("critical");
 
-        <h3>
-          Why Solana?
-        </h3>
-
-        <p>
-          Solana can serve as a verification layer for payment
-          events. In the current MVP, this functionality is
-          demonstrated through a prepared Devnet event rather
-          than a live on-chain transaction.
-          A future version could store verifiable payment
-          records on-chain while keeping detailed salary and
-          personal information off-chain.
-        </p>
-
-        <button
-          class="button primary"
-          onclick="showSolana()"
-        >
-          Prepare Solana event
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- FUTURE -->
-
-  <section>
-
-    <div class="container">
-
-      <div class="label">
-        Future development
-      </div>
-
-      <h2>
-        From MVP to<br>
-        real infrastructure.
-      </h2>
-
-      <p class="description">
-        The next version of PayProof could include
-        additional tools for employees and businesses.
-      </p>
-
-
-      <div class="future">
-
-        <div class="future-item">
-          <span>01</span>
-          Payment system integrations
-        </div>
-
-        <div class="future-item">
-          <span>02</span>
-          Two-sided payment confirmation
-        </div>
-
-        <div class="future-item">
-          <span>03</span>
-          Real on-chain payment records
-        </div>
-
-        <div class="future-item">
-          <span>04</span>
-          Automated report generation
-        </div>
-
-        <div class="future-item">
-          <span>05</span>
-          Secure off-chain data storage
-        </div>
-
-        <div class="future-item">
-          <span>06</span>
-          Business analytics and insights
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="container footer">
-
-      <span>
-        PayProof · Solana Create 2026
-      </span>
-
-      <span>
-        Every payment. Proven.
-      </span>
-
-    </div>
-
-  </footer>
-
-
-  <!-- TOAST -->
-
-  <div id="toast" class="toast"></div>
-
-
-  <script>
-
-    function showToast(message) {
-
-      const toast = document.getElementById("toast");
-
-      toast.textContent = message;
-
-      toast.classList.add("show");
-
-      setTimeout(function() {
-        toast.classList.remove("show");
-      }, 3000);
-
+        warning.innerHTML = `
+            <strong>Delay warning:</strong>
+            ${delays} recorded delays.
+            A warning is generated after the
+            third confirmed delay.
+        `;
     }
 
 
-    function recordPayment() {
+    amountInput.value = "";
+    lateInput.value = "";
 
-      const input = document.getElementById("amount");
-
-      const amount = Number(input.value);
-
-      if (!amount || amount <= 0) {
-
-        showToast("Please enter a valid payment amount.");
-
-        return;
-      }
-
-      showToast(
+    showToast(
         "✓ Payment of ₸" +
         amount.toLocaleString("en-US") +
-        " recorded successfully."
-      );
-
-      input.value = "";
-
-    }
+        " recorded."
+    );
+}
 
 
-    function showSolana() {
+function prepareSolana() {
 
-      showToast(
-        "✓ Demo event prepared for Solana Devnet · DEMO-PAYPROOF-2026"
-      );
+    const random =
+        Math.random()
+        .toString(36)
+        .substring(2, 10)
+        .toUpperCase();
 
-    }
+    const eventId =
+        "PAYPROOF-" +
+        new Date().getFullYear() +
+        "-" +
+        random;
 
-  </script>
+
+    document.getElementById("eventId").textContent =
+        eventId;
+
+
+    document
+        .getElementById("eventResult")
+        .classList.add("show");
+
+
+    showToast(
+        "✓ Demo event prepared for Solana Devnet."
+    );
+}
+
+</script>
 
 </body>
 </html>
