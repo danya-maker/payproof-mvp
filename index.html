@@ -2318,274 +2318,187 @@ toast(
 }
 
 
-/* =========================
-   PHANTOM WALLET
-========================= */
+```html
+<script>
+/* =========================================
+   PAYPROOF — PHANTOM PC + MOBILE
+========================================= */
 
-let phantomProvider = null;
+const PAYPROOF_URL = window.location.href;
 
-function getPhantomProvider(){
-  if(window.phantom?.solana?.isPhantom) return window.phantom.solana;
-  if(window.solana?.isPhantom) return window.solana;
+function getPhantomProvider() {
+  if (window.phantom?.solana?.isPhantom) {
+    return window.phantom.solana;
+  }
+
+  if (window.solana?.isPhantom) {
+    return window.solana;
+  }
+
   return null;
 }
 
-function shortAddress(address){
-  return address.slice(0,6) + "..." + address.slice(-6);
+function isMobileDevice() {
+  return /Android|iPhone|iPad|iPod/i.test(
+    navigator.userAgent
+  );
 }
 
-function setWalletConnected(address){
-  const button = document.getElementById("connectWalletBtn");
-  const wallet = document.getElementById("walletAddress");
-  wallet.style.display = "inline-flex";
-  wallet.textContent = shortAddress(address);
-  button.textContent = "Disconnect";
-}
+async function connectPhantomPayProof() {
 
-function setWalletDisconnected(){
-  const button = document.getElementById("connectWalletBtn");
-  const wallet = document.getElementById("walletAddress");
-  wallet.style.display = "none";
-  wallet.textContent = "Not connected";
-  button.textContent = "Connect Phantom";
-}
+  /* ==============================
+     PC — Phantom extension
+  ============================== */
 
-async function connectPhantom(){
-  phantomProvider = getPhantomProvider();
-  if(!phantomProvider){
-    toast("Phantom Wallet не найден.");
-    setTimeout(() => window.open("https://phantom.app/", "_blank"), 500);
-    return;
-  }
-  try{
-    const response = await phantomProvider.connect();
-    const address = response.publicKey.toString();
-    setWalletConnected(address);
-    toast("✓ Phantom connected");
-  }catch(error){
-    console.error("Phantom connection error:", error);
-    toast("Подключение отменено.");
-  }
-}
+  const provider = getPhantomProvider();
 
-async function disconnectPhantom(){
-  if(!phantomProvider) return;
-  try{
-    await phantomProvider.disconnect();
-    setWalletDisconnected();
-    toast("Wallet disconnected");
-  }catch(error){
-    console.error("Disconnect error:", error);
-  }
-}
-
-document.getElementById("connectWalletBtn").addEventListener("click", async () => {
-  if(phantomProvider?.publicKey) await disconnectPhantom();
-  else await connectPhantom();
-});
-
-window.addEventListener("load", () => {
-  phantomProvider = getPhantomProvider();
-  if(!phantomProvider) return;
-
-  phantomProvider.on("connect", publicKey => {
-    setWalletConnected(publicKey.toString());
-  });
-
-  phantomProvider.on("disconnect", () => {
-    setWalletDisconnected();
-  });
-
-  phantomProvider.on("accountChanged", publicKey => {
-    if(publicKey) setWalletConnected(publicKey.toString());
-    else setWalletDisconnected();
-  });
-});
-
-
-/* INITIALIZE */
-
-updateAnalytics();
-
-</script>
-
-</body>
-</html>
-<a href="./phantom.html" class="btn primary">
-  Connect Phantom
-</a>
-<script>
-/* ================================
-   PAYPROOF — PHANTOM CONNECT
-   PC + MOBILE
-================================ */
-
-async function connectPayProofPhantom() {
-
-  // 1. Проверяем Phantom extension
-  const provider =
-    window.phantom?.solana?.isPhantom
-      ? window.phantom.solana
-      : window.solana?.isPhantom
-        ? window.solana
-        : null;
-
-  // 2. Если Phantom найден — подключаем кошелёк
   if (provider) {
+
     try {
 
-      const response = await provider.connect();
+      const result = await provider.connect();
 
       const publicKey =
-        response?.publicKey ||
+        result?.publicKey ||
         provider.publicKey;
 
       if (!publicKey) {
-        throw new Error("Public key not found");
+        throw new Error("Wallet address not found");
       }
 
       const address = publicKey.toString();
 
-      // Сохраняем публичный адрес для PayProof
       localStorage.setItem(
         "payproof_wallet",
         address
       );
 
-      console.log("Phantom connected:", address);
+      updatePayProofWallet(address);
 
-      // Обновляем кнопку
-      const button =
-        document.getElementById("connectWalletBtn");
+      console.log(
+        "Phantom connected:",
+        address
+      );
 
-      if (button) {
-        button.textContent =
-          address.slice(0, 6) +
-          "..." +
-          address.slice(-6);
-      }
-
-      return address;
+      return;
 
     } catch (error) {
 
       console.error(
-        "Phantom connection error:",
+        "Phantom error:",
         error
       );
 
       if (error?.code === 4001) {
-        alert("Подключение Phantom отменено.");
+        return;
       }
-
-      return null;
     }
   }
 
 
-  /* ================================
-     3. MOBILE
-  ================================= */
+  /* ==============================
+     MOBILE — Phantom App
+  ============================== */
 
-  const isMobile =
-    /Android|iPhone|iPad|iPod/i.test(
-      navigator.userAgent
-    );
-
-  if (isMobile) {
+  if (isMobileDevice()) {
 
     /*
-      Пытаемся открыть Phantom App.
-      После открытия пользователь сможет
-      продолжить подключение из приложения.
+      Phantom mobile universal link.
+
+      Если Phantom установлен,
+      телефон должен передать ссылку
+      приложению Phantom.
     */
 
-    const currentUrl =
-      window.location.href;
-
-    const phantomUrl =
+    const url =
       "https://phantom.app/ul/browse/" +
-      encodeURIComponent(currentUrl);
+      encodeURIComponent(
+        window.location.href
+      );
 
-    window.location.href = phantomUrl;
+    window.location.href = url;
 
-    return null;
+    return;
   }
 
 
-  /* ================================
-     4. PC WITHOUT PHANTOM
-  ================================= */
+  /* ==============================
+     PC — Phantom отсутствует
+  ============================== */
 
-  const install =
-    confirm(
-      "Phantom не найден.\n\n" +
-      "Открыть Phantom для установки?"
-    );
-
-  if (install) {
-
-    window.open(
-      "https://phantom.app/",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  }
-
-  return null;
+  window.open(
+    "https://phantom.app/download",
+    "_blank"
+  );
 }
 
 
-/* ================================
-   CONNECT BUTTON
-================================ */
+/* =========================================
+   UPDATE BUTTON
+========================================= */
 
-const payProofButton =
+function updatePayProofWallet(address) {
+
+  const button =
+    document.getElementById(
+      "connectWalletBtn"
+    );
+
+  if (!button || !address) return;
+
+  button.textContent =
+    address.slice(0, 6) +
+    "..." +
+    address.slice(-6);
+}
+
+
+/* =========================================
+   CONNECT BUTTON
+========================================= */
+
+const connectButton =
   document.getElementById(
     "connectWalletBtn"
   );
 
-if (payProofButton) {
+if (connectButton) {
 
-  payProofButton.addEventListener(
+  connectButton.addEventListener(
     "click",
-    async function(event) {
+    function(event) {
 
       event.preventDefault();
 
-      await connectPayProofPhantom();
+      connectPhantomPayProof();
 
     }
   );
 }
 
 
-/* ================================
-   RESTORE PREVIOUS CONNECTION
-================================ */
+/* =========================================
+   RESTORE CONNECTION ON PC
+========================================= */
 
 window.addEventListener(
   "load",
-  async () => {
+  async function() {
 
     const provider =
-      window.phantom?.solana?.isPhantom
-        ? window.phantom.solana
-        : window.solana?.isPhantom
-          ? window.solana
-          : null;
+      getPhantomProvider();
 
     if (!provider) return;
 
     try {
 
-      const response =
+      const result =
         await provider.connect({
           onlyIfTrusted: true
         });
 
       const publicKey =
-        response?.publicKey ||
+        result?.publicKey ||
         provider.publicKey;
 
       if (publicKey) {
@@ -2598,26 +2511,13 @@ window.addEventListener(
           address
         );
 
-        const button =
-          document.getElementById(
-            "connectWalletBtn"
-          );
-
-        if (button) {
-
-          button.textContent =
-            address.slice(0, 6) +
-            "..." +
-            address.slice(-6);
-        }
+        updatePayProofWallet(address);
       }
 
     } catch (error) {
 
-      // Пользователь ещё не подключал
-      // этот сайт к Phantom.
       console.log(
-        "No trusted Phantom connection."
+        "Phantom is not connected yet."
       );
     }
   }
