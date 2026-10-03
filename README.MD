@@ -2,8 +2,8 @@ PayProof
 Every payment. Proven.
 PayProof is an MVP designed to make salary payments more transparent, structured, and verifiable for employees and small businesses.
 Live Demo: https://payproof-mvp.vercel.app/
-Pitch Video: https://drive.google.com/file/d/1k9KLSwMlFVDvyeIhqx_asv0bre69um5C/view?usp=sharing
-Demo Video: https://drive.google.com/file/d/1ppSFC5ls3MWH7YkSYOHR19KiFRMolaHZ/view?usp=sharing
+Pitch Video: https://youtu.be/8oBv9BfQUGw?si=XB9ftlr5ByIZ6EjE
+Demo Video: https://youtu.be/9FC9NCuPhs0?si=GaslcU20QiSlFdXE
 Presentation: https://drive.google.com/file/d/1WTvpLlqMet178p1K8cqLgs8XegQiWRWI/view?usp=sharing
 Colosseum Submission: Coming soon
 
