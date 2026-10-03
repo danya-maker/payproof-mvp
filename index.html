@@ -829,6 +829,10 @@ Pay<span>Proof</span>
 
 <a href="#solana">Solana</a>
 
+<button id="connectWalletBtn" class="btn primary" type="button" style="padding:10px 15px;margin-left:5px;">Connect Phantom</button>
+
+<span id="walletAddress" style="display:none;align-items:center;padding:9px 12px;border-radius:10px;border:1px solid #087cff35;background:#087cff0c;color:#83c4ff;font-size:12px;">Not connected</span>
+
 </div>
 
 </div>
@@ -2102,6 +2106,91 @@ toast(
 );
 
 }
+
+
+/* =========================
+   PHANTOM WALLET
+========================= */
+
+let phantomProvider = null;
+
+function getPhantomProvider(){
+  if(window.phantom?.solana?.isPhantom) return window.phantom.solana;
+  if(window.solana?.isPhantom) return window.solana;
+  return null;
+}
+
+function shortAddress(address){
+  return address.slice(0,6) + "..." + address.slice(-6);
+}
+
+function setWalletConnected(address){
+  const button = document.getElementById("connectWalletBtn");
+  const wallet = document.getElementById("walletAddress");
+  wallet.style.display = "inline-flex";
+  wallet.textContent = shortAddress(address);
+  button.textContent = "Disconnect";
+}
+
+function setWalletDisconnected(){
+  const button = document.getElementById("connectWalletBtn");
+  const wallet = document.getElementById("walletAddress");
+  wallet.style.display = "none";
+  wallet.textContent = "Not connected";
+  button.textContent = "Connect Phantom";
+}
+
+async function connectPhantom(){
+  phantomProvider = getPhantomProvider();
+  if(!phantomProvider){
+    toast("Phantom Wallet не найден.");
+    setTimeout(() => window.open("https://phantom.app/", "_blank"), 500);
+    return;
+  }
+  try{
+    const response = await phantomProvider.connect();
+    const address = response.publicKey.toString();
+    setWalletConnected(address);
+    toast("✓ Phantom connected");
+  }catch(error){
+    console.error("Phantom connection error:", error);
+    toast("Подключение отменено.");
+  }
+}
+
+async function disconnectPhantom(){
+  if(!phantomProvider) return;
+  try{
+    await phantomProvider.disconnect();
+    setWalletDisconnected();
+    toast("Wallet disconnected");
+  }catch(error){
+    console.error("Disconnect error:", error);
+  }
+}
+
+document.getElementById("connectWalletBtn").addEventListener("click", async () => {
+  if(phantomProvider?.publicKey) await disconnectPhantom();
+  else await connectPhantom();
+});
+
+window.addEventListener("load", () => {
+  phantomProvider = getPhantomProvider();
+  if(!phantomProvider) return;
+
+  phantomProvider.on("connect", publicKey => {
+    setWalletConnected(publicKey.toString());
+  });
+
+  phantomProvider.on("disconnect", () => {
+    setWalletDisconnected();
+  });
+
+  phantomProvider.on("accountChanged", publicKey => {
+    if(publicKey) setWalletConnected(publicKey.toString());
+    else setWalletDisconnected();
+  });
+});
 
 
 /* INITIALIZE */
