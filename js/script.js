@@ -1,7 +1,3 @@
-/* =========================
-   PAYPROOF MVP
-========================= */
-
 const SOL_TO_KZT = 138000;
 
 let paymentCount = 3;
@@ -9,431 +5,275 @@ let delayCount = 2;
 let onTimeCount = 1;
 let totalSol = 6.54;
 
-
 /* TOAST */
-
-function toast(text) {
-    const t = document.getElementById("toast");
-
-    if (!t) return;
-
-    t.textContent = text;
-    t.classList.add("show");
-
-    setTimeout(() => {
-        t.classList.remove("show");
-    }, 2500);
+function toast(text){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = text;
+  t.classList.add("show");
+  setTimeout(() => {
+    t.classList.remove("show");
+  }, 2500);
 }
 
-
-/* KZT */
-
-function formatKzt(value) {
-    return "₸" + Math.round(value).toLocaleString("en-US");
+/* KZT FORMAT */
+function formatKzt(value){
+  return "₸" + Math.round(value).toLocaleString("en-US");
 }
-
 
 /* UPDATE ANALYTICS */
+function updateAnalytics(){
+  const totalKzt = totalSol * SOL_TO_KZT;
 
-function updateAnalytics() {
-    const totalPayroll = document.getElementById("totalPayroll");
-    const paymentCountEl = document.getElementById("paymentCount");
-    const onTimeEl = document.getElementById("onTimeCount");
-    const delayEl = document.getElementById("delayCount");
+  const totalPayrollEl = document.getElementById("totalPayroll");
+  if(totalPayrollEl) totalPayrollEl.textContent = totalSol.toFixed(2) + " SOL";
 
-    const walletEvents = document.getElementById("walletEvents");
-    const walletDelays = document.getElementById("walletDelays");
+  const totalPayrollKztEl = document.getElementById("totalPayrollKzt");
+  if(totalPayrollKztEl) totalPayrollKztEl.textContent = "≈ " + formatKzt(totalKzt);
 
-    if (totalPayroll) {
-        totalPayroll.textContent =
-            totalSol.toFixed(2) + " SOL";
-    }
+  const countEl = document.getElementById("count");
+  if(countEl) countEl.textContent = paymentCount;
 
-    if (paymentCountEl) {
-        paymentCountEl.textContent = paymentCount;
-    }
+  const onTimeEl = document.getElementById("onTime");
+  if(onTimeEl) onTimeEl.textContent = onTimeCount;
 
-    if (onTimeEl) {
-        onTimeEl.textContent = onTimeCount;
-    }
+  const delaysEl = document.getElementById("delays");
+  if(delaysEl) delaysEl.textContent = delayCount;
 
-    if (delayEl) {
-        delayEl.textContent = delayCount;
-    }
+  const walletEventsEl = document.getElementById("walletEvents");
+  if(walletEventsEl) walletEventsEl.textContent = paymentCount;
 
-    if (walletEvents) {
-        walletEvents.textContent = paymentCount;
-    }
-
-    if (walletDelays) {
-        walletDelays.textContent = delayCount;
-    }
+  const walletDelaysEl = document.getElementById("walletDelays");
+  if(walletDelaysEl) walletDelaysEl.textContent = delayCount;
 }
-
 
 /* RECORD PAYMENT */
+function recordPayment(){
+  const amountInput = document.getElementById("amount");
+  const lateInput = document.getElementById("late");
+  const employeeInput = document.getElementById("employeeName");
 
-function recordPayment() {
+  const amount = Number(amountInput.value);
+  const late = lateInput.value;
+  const employee = employeeInput.value.trim() || "Employee";
 
-    const employee =
-        document.getElementById("employeeName");
+  if(!amount || amount <= 0){
+    toast("Enter a payment amount in SOL.");
+    return;
+  }
 
-    const amountInput =
-        document.getElementById("paymentAmount");
+  if(late === ""){
+    toast("Enter the number of days late.");
+    return;
+  }
 
-    const delayInput =
-        document.getElementById("paymentDelay");
+  const daysLate = Number(late);
 
-    const employeeName =
-        employee ? employee.value.trim() : "";
+  paymentCount++;
+  totalSol += amount;
 
-    const amount =
-        amountInput ? parseFloat(amountInput.value) : 0;
+  if(daysLate > 0){
+    delayCount++;
+  } else {
+    onTimeCount++;
+  }
 
-    const delay =
-        delayInput ? parseInt(delayInput.value || "0") : 0;
+  const row = document.createElement("div");
+  row.className = "payment";
 
-    if (!employeeName) {
-        toast("Enter employee name");
-        return;
-    }
+  const date = new Date().toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
 
-    if (!amount || amount <= 0) {
-        toast("Enter a valid amount");
-        return;
-    }
+  row.innerHTML = `
+    <span>${date}</span>
+    <span>${amount.toFixed(2)} SOL</span>
+    <span class="${daysLate > 0 ? "delayed" : "paid"}">
+      ${daysLate > 0 ? daysLate + " days late" : "✓ On time"}
+    </span>
+    <span class="chain">Blockchain ready</span>
+  `;
 
-    if (delay < 0) {
-        toast("Delay cannot be negative");
-        return;
-    }
+  const historyEl = document.getElementById("history");
+  if(historyEl) historyEl.prepend(row);
 
-    paymentCount++;
-    totalSol += amount;
+  updateAnalytics();
 
-    if (delay > 0) {
-        delayCount++;
+  const warning = document.getElementById("warning");
+  if(warning){
+    if(delayCount >= 3){
+      warning.classList.add("critical");
+      warning.innerHTML = `
+        <strong>⚠ Critical payment warning:</strong>
+        ${delayCount} payment delays have been recorded. Accounting attention is required.
+      `;
     } else {
-        onTimeCount++;
+      warning.classList.remove("critical");
+      warning.innerHTML = `
+        <strong>⚠ Payment warning:</strong>
+        ${delayCount} payment delays are currently recorded. A critical warning appears after the third delay.
+      `;
     }
+  }
 
-    const table =
-        document.getElementById("paymentTable");
+  amountInput.value = "";
+  lateInput.value = "";
+  employeeInput.value = "";
 
-    if (table) {
-
-        const row =
-            document.createElement("div");
-
-        row.className = "payment-row";
-
-        row.innerHTML = `
-            <div>
-                <strong>${employeeName}</strong>
-                <span>Salary payment</span>
-            </div>
-
-            <div>
-                ${amount.toFixed(2)} SOL
-            </div>
-
-            <div>
-                ${delay > 0
-                    ? `<span class="status delayed">
-                        ${delay} day${delay === 1 ? "" : "s"} late
-                       </span>`
-                    : `<span class="status paid">
-                        On time
-                       </span>`
-                }
-            </div>
-
-            <div>
-                ${new Date().toLocaleDateString()}
-            </div>
-        `;
-
-        table.prepend(row);
-    }
-
-    updateAnalytics();
-
-    if (delayCount >= 3) {
-        const warning =
-            document.getElementById("warning");
-
-        if (warning) {
-            warning.textContent =
-                "Warning: repeated salary delays detected.";
-        }
-    }
-
-    toast("Payment recorded");
-
-    if (employee) employee.value = "";
-    if (amountInput) amountInput.value = "";
-    if (delayInput) delayInput.value = "0";
+  toast("✓ Payment for " + employee + " recorded.");
 }
 
+/* SOLANA EVENT */
+function solana(){
+  const id = "PAYPROOF-" + Date.now().toString(36).toUpperCase();
+  const eventIdEl = document.getElementById("eventId");
+  const eventEl = document.getElementById("event");
 
-/* SOLANA DEMO EVENT */
+  if(eventIdEl) eventIdEl.textContent = "Solana Devnet · Demo Event ID: " + id;
+  if(eventEl) eventEl.classList.add("show");
 
-function solana() {
-
-    const eventId =
-        "PP-" +
-        Date.now().toString(36).toUpperCase();
-
-    const eventElement =
-        document.getElementById("solanaEvent");
-
-    if (eventElement) {
-        eventElement.textContent = eventId;
-    }
-
-    toast("Solana event prepared");
-
-    return eventId;
+  toast("✓ Blockchain event prepared.");
 }
 
+/* PHANTOM WALLET */
+let phantomProvider = null;
 
-/* PHANTOM */
-
-function getPhantomProvider() {
-
-    if (window.phantom &&
-        window.phantom.solana &&
-        window.phantom.solana.isPhantom
-    ) {
-        return window.phantom.solana;
-    }
-
-    if (
-        window.solana &&
-        window.solana.isPhantom
-    ) {
-        return window.solana;
-    }
-
-    return null;
+function getPhantomProvider(){
+  if(window.phantom && window.phantom.solana){
+    return window.phantom.solana;
+  }
+  if(window.solana && window.solana.isPhantom){
+    return window.solana;
+  }
+  return null;
 }
 
-
-/* CONNECT PHANTOM */
-
-async function connectPhantom() {
-
-    const provider =
-        getPhantomProvider();
-
-    if (!provider) {
-
-        toast("Phantom wallet not found");
-
-        const isMobile =
-            /Android|iPhone|iPad|iPod/i.test(
-                navigator.userAgent
-            );
-
-        if (isMobile) {
-
-            const currentUrl =
-                encodeURIComponent(
-                    window.location.href
-                );
-
-            window.location.href =
-                https://phantom.app/ul/browse/${currentUrl};
-        }
-
-        return;
-    }
-
-    try {
-
-        const response =
-            await provider.connect();
-
-        const publicKey =
-            response.publicKey.toString();
-
-        const wallet =
-            document.getElementById("walletAddress");
-
-        const button =
-            document.getElementById("phantomButton");
-
-        if (wallet) {
-            wallet.textContent =
-                publicKey.slice(0, 4) +
-                "..." +
-                publicKey.slice(-4);
-        }
-
-        if (button) {
-            button.textContent =
-                "Disconnect Phantom";
-
-            button.onclick =
-                disconnectPhantom;
-        }
-
-        toast("Phantom connected");
-
-    } catch (error) {
-
-        console.error(error);
-
-        toast("Wallet connection cancelled");
-    }
+function shortAddress(address){
+  if(!address) return "";
+  return address.slice(0, 6) + "..." + address.slice(-6);
 }
 
+function setWalletConnected(address){
+  const button = document.getElementById("connectWalletBtn");
+  const wallet = document.getElementById("walletAddress");
 
-/* DISCONNECT PHANTOM */
+  if(!button || !wallet) return;
 
-async function disconnectPhantom() {
-
-    const provider =
-        getPhantomProvider();
-
-    if (!provider) return;
-
-    try {
-
-        await provider.disconnect();
-
-    } catch (error) {
-
-        console.error(error);
-    }
-
-    const wallet =
-        document.getElementById("walletAddress");
-
-    const button =
-        document.getElementById("phantomButton");
-
-    if (wallet) {
-        wallet.textContent =
-            "Not connected";
-    }
-
-    if (button) {
-
-        button.textContent =
-            "Connect Phantom";
-
-        button.onclick =
-            connectPhantom;
-    }
-
-    toast("Phantom disconnected");
+  wallet.style.display = "inline-flex";
+  wallet.textContent = shortAddress(address);
+  button.textContent = "Disconnect";
 }
 
+function setWalletDisconnected(){
+  const button = document.getElementById("connectWalletBtn");
+  const wallet = document.getElementById("walletAddress");
 
-/* SETUP PHANTOM */
+  if(!button || !wallet) return;
 
-function setupPhantom() {
-
-    const button =
-        document.getElementById("phantomButton");
-
-    if (!button) return;
-
-    button.addEventListener(
-        "click",
-        connectPhantom
-    );
-
-    const provider =
-        getPhantomProvider();
-
-    if (provider) {
-
-        provider.on(
-            "connect",
-            () => {
-
-                const wallet =
-                    document.getElementById(
-                        "walletAddress"
-                    );
-
-                if (wallet && provider.publicKey) {
-
-                    const key =
-                        provider.publicKey.toString();
-
-                    wallet.textContent =
-                        key.slice(0, 4) +
-                        "..." +
-                        key.slice(-4);
-                }
-            }
-        );
-
-        provider.on(
-            "disconnect",
-            () => {
-
-                const wallet =
-                    document.getElementById(
-                        "walletAddress"
-                    );
-
-                if (wallet) {
-                    wallet.textContent =
-                        "Not connected";
-                }
-            }
-        );
-    }
+  wallet.style.display = "none";
+  wallet.textContent = "Not connected";
+  button.textContent = "Connect Phantom";
 }
 
+async function connectPhantom(){
+  phantomProvider = getPhantomProvider();
 
-/* NAVIGATION */
+  if(!phantomProvider){
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-function setupNavigation() {
+    if(isMobile){
+      const phantomBrowseUrl =
+        "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href);
+      window.location.href = phantomBrowseUrl;
+      return;
+    }
 
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(link => {
+    window.open("https://phantom.app/download", "_blank", "noopener,noreferrer");
+    toast("Opening Phantom download...");
+    return;
+  }
 
-            link.addEventListener(
-                "click",
-                event => {
+  try{
+    const response = await phantomProvider.connect();
+    const publicKey = response?.publicKey || phantomProvider.publicKey;
 
-                    const targetId =
-                        link.getAttribute("href");
+    if(!publicKey){
+      throw new Error("Phantom connected but public key was not returned.");
+    }
 
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-                    if (!target) return;
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                }
-            );
-        });
+    const address = publicKey.toString();
+    localStorage.setItem("payproof_wallet", address);
+    setWalletConnected(address);
+    toast("✓ Phantom connected");
+  } catch(error){
+    console.error("Phantom connection error:", error);
+    if(error?.code === 4001){
+      toast("Connection cancelled in Phantom.");
+    } else {
+      toast("Could not connect to Phantom.");
+    }
+  }
 }
 
+async function disconnectPhantom(){
+  if(!phantomProvider) return;
 
-/* INITIALIZATION */
+  try{
+    await phantomProvider.disconnect();
+  } catch(error){
+    console.error("Phantom disconnect error:", error);
+  }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+  setWalletDisconnected();
+}
 
-        updateAnalytics();
+function setupPhantom(){
+  phantomProvider = getPhantomProvider();
 
-        setupPhantom();
+  if(!phantomProvider){
+    return;
+  }
 
-        setupNavigation();
+  if(phantomProvider.isConnected && phantomProvider.publicKey){
+    setWalletConnected(phantomProvider.publicKey.toString());
+  }
+
+  phantomProvider.on?.("connect", (publicKey) => {
+    if(publicKey){
+      setWalletConnected(publicKey.toString());
     }
-);
+  });
+
+  phantomProvider.on?.("disconnect", () => {
+    setWalletDisconnected();
+  });
+
+  phantomProvider.on?.("accountChanged", (publicKey) => {
+    if(publicKey){
+      setWalletConnected(publicKey.toString());
+    } else {
+      setWalletDisconnected();
+    }
+  });
+}
+
+document.getElementById("connectWalletBtn")?.addEventListener("click", async () => {
+  phantomProvider = getPhantomProvider();
+
+  if(phantomProvider?.isConnected || phantomProvider?.publicKey){
+    await disconnectPhantom();
+  } else {
+    await connectPhantom();
+  }
+});
+
+window.addEventListener("load", () => {
+  setupPhantom();
+  setTimeout(setupPhantom, 300);
+  setTimeout(setupPhantom, 1000);
+});
+
+/* INITIALIZE */
+updateAnalytics();
