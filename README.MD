@@ -89,11 +89,11 @@ accounting tools
 blockchain-based payment history
 Submission
 Pitch Video
-[Add pitch video link]
+https://youtu.be/8oBv9BfQUGw?si=8JbYKUtcDHIuiZjs
 Demo Video
-[Add demo video link]
+https://youtube.com/shorts/9FC9NCuPhs0?si=d2LifoEddh00wqBn
 Presentation
-[Add presentation link]
+https://drive.google.com/file/d/17vYTGIReccOkHP94adpzW5v4eC5NnjfP/view?usp=drive_link
 Roadmap
 Phase 1 — MVP
 Payment tracking
