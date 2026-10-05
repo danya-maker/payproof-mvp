@@ -19,7 +19,7 @@
 
 | Name            | Role                    | Contact                                  |
 | --------------- | ----------------------- | ---------------------------------------- |
-| Rayana     | Founder & Developer          | [Telegram](runmein) ·                    |
+| Rayana     | Founder & Developer        | [Telegram](runmein) ·                    |
 
 ---
 
