@@ -102,27 +102,25 @@ Web deployment
 
 ✦ Project Structure
 payproof-mvp/
-│
-├── docs/
-│   └── payproof-overview.png
-│
-├── programs/
-│   └── payproof/
-│       ├── src/
-│       │   └── lib.rs
-│       └── Cargo.toml
-│
-├── tests/
-│   └── payproof.ts
-│
-├── Anchor.toml
-├── Cargo.toml
-├── LICENSE
-├── CONTRIBUTING.md
-├── index.html
-├── style.css
-├── script.js
-├── Phantom wallet.html
+
+ docs/
+ └── payproof-overview.png
+ programs/
+   └── payproof/
+    ├── src/
+    │   └── lib.rs
+    └── Cargo.toml
+
+── tests/
+  └── payproof.ts
+
+── Anchor.toml ── Cargo.toml
+── LICENSE
+── CONTRIBUTING.md
+── index.html
+── style.css
+── script.js
+── Phantom wallet.html
 └── README.md
 
 
