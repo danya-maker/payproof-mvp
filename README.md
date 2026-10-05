@@ -12,8 +12,7 @@ Live Demo · GitHub · Solana Program
   <img src="docs/payproof-overview.png" alt="PayProof overview" width="900">
 </p>
 
-
-⸻
+_________
 
 
 ✦ About
