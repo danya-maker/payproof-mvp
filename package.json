@@ -1,0 +1,9 @@
+{
+  "name": "payproof",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Salary payment tracking MVP with Solana integration",
+  "scripts": {
+    "check": "node scripts/check-program.js"
+  }
+}
