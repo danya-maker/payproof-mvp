@@ -5,8 +5,8 @@ Transparent salary tracking for employees and small businesses.
 Live Demo · GitHub · Solana Program
 </div>
 
-
-
+   
+ 
 
 <p align="center">
   <img src="docs/payproof-overview.png" alt="PayProof overview" width="900">
