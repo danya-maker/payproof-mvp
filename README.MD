@@ -101,27 +101,20 @@ Web deployment
 
 
 ✦ Project Structure
-payproof-mvp/
 
- docs/
- └── payproof-overview.png
- programs/
-   └── payproof/
-    ├── src/
-    │   └── lib.rs
-    └── Cargo.toml
+The repository contains the PayProof web application, Solana Anchor program, tests and project documentation.
 
-── tests/
-  └── payproof.ts
+Web application
+index.html · style.css · script.js
 
-── Anchor.toml ── Cargo.toml
-── LICENSE
-── CONTRIBUTING.md
-── index.html
-── style.css
-── script.js
-── Phantom wallet.html
-└── README.md
+Solana program
+programs/payproof/src/lib.rs · programs/payproof/Cargo.toml · Anchor.toml
+
+Tests
+tests/payproof.ts
+
+Documentation
+README.md · docs/ · CONTRIBUTING.md · LICENSE
 
 
 ⸻
