@@ -6,7 +6,7 @@ describe("PayProof", () => {
 
   it("Program is deployed", async () => {
     const programId = new anchor.web3.PublicKey(
-      "EJKAW3jKPKDFUw3b0gVvJMnhY21CR9qg7a8nqaZrZM7p"
+      "declare_id!("EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p");"
     );
 
     const accountInfo = await provider.connection.getAccountInfo(programId);
