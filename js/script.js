@@ -1,279 +1,128 @@
-const SOL_TO_KZT = 138000;
+const PROGRAM_ID = "EJKAW3jKPKDFUw3b0gVvJMnhY21CR9qg7a8nqaZrZM7p";
+const DEVNET_RPC = "https://api.devnet.solana.com";
 
-let paymentCount = 3;
-let delayCount = 2;
-let onTimeCount = 1;
-let totalSol = 6.54;
+let walletAddress = null;
 
-/* TOAST */
-function toast(text){
-  const t = document.getElementById("toast");
-  if(!t) return;
-  t.textContent = text;
-  t.classList.add("show");
-  setTimeout(() => {
-    t.classList.remove("show");
-  }, 2500);
-}
-
-/* KZT FORMAT */
-function formatKzt(value){
-  return "₸" + Math.round(value).toLocaleString("en-US");
-}
-
-/* UPDATE ANALYTICS */
-function updateAnalytics(){
-  const totalKzt = totalSol * SOL_TO_KZT;
-
-  const totalPayrollEl = document.getElementById("totalPayroll");
-  if(totalPayrollEl) totalPayrollEl.textContent = totalSol.toFixed(2) + " SOL";
-
-  const totalPayrollKztEl = document.getElementById("totalPayrollKzt");
-  if(totalPayrollKztEl) totalPayrollKztEl.textContent = "≈ " + formatKzt(totalKzt);
-
-  const countEl = document.getElementById("count");
-  if(countEl) countEl.textContent = paymentCount;
-
-  const onTimeEl = document.getElementById("onTime");
-  if(onTimeEl) onTimeEl.textContent = onTimeCount;
-
-  const delaysEl = document.getElementById("delays");
-  if(delaysEl) delaysEl.textContent = delayCount;
-
-  const walletEventsEl = document.getElementById("walletEvents");
-  if(walletEventsEl) walletEventsEl.textContent = paymentCount;
-
-  const walletDelaysEl = document.getElementById("walletDelays");
-  if(walletDelaysEl) walletDelaysEl.textContent = delayCount;
-}
-
-/* RECORD PAYMENT */
-function recordPayment(){
-  const amountInput = document.getElementById("amount");
-  const lateInput = document.getElementById("late");
-  const employeeInput = document.getElementById("employeeName");
-
-  const amount = Number(amountInput.value);
-  const late = lateInput.value;
-  const employee = employeeInput.value.trim() || "Employee";
-
-  if(!amount || amount <= 0){
-    toast("Enter a payment amount in SOL.");
-    return;
-  }
-
-  if(late === ""){
-    toast("Enter the number of days late.");
-    return;
-  }
-
-  const daysLate = Number(late);
-
-  paymentCount++;
-  totalSol += amount;
-
-  if(daysLate > 0){
-    delayCount++;
-  } else {
-    onTimeCount++;
-  }
-
-  const row = document.createElement("div");
-  row.className = "payment";
-
-  const date = new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  });
-
-  row.innerHTML = `
-    <span>${date}</span>
-    <span>${amount.toFixed(2)} SOL</span>
-    <span class="${daysLate > 0 ? "delayed" : "paid"}">
-      ${daysLate > 0 ? daysLate + " days late" : "✓ On time"}
-    </span>
-    <span class="chain">Blockchain ready</span>
-  `;
-
-  const historyEl = document.getElementById("history");
-  if(historyEl) historyEl.prepend(row);
-
-  updateAnalytics();
-
-  const warning = document.getElementById("warning");
-  if(warning){
-    if(delayCount >= 3){
-      warning.classList.add("critical");
-      warning.innerHTML = `
-        <strong>⚠ Critical payment warning:</strong>
-        ${delayCount} payment delays have been recorded. Accounting attention is required.
-      `;
-    } else {
-      warning.classList.remove("critical");
-      warning.innerHTML = `
-        <strong>⚠ Payment warning:</strong>
-        ${delayCount} payment delays are currently recorded. A critical warning appears after the third delay.
-      `;
-    }
-  }
-
-  amountInput.value = "";
-  lateInput.value = "";
-  employeeInput.value = "";
-
-  toast("✓ Payment for " + employee + " recorded.");
-}
-
-/* SOLANA EVENT */
-function solana(){
-  const id = "PAYPROOF-" + Date.now().toString(36).toUpperCase();
-  const eventIdEl = document.getElementById("eventId");
-  const eventEl = document.getElementById("event");
-
-  if(eventIdEl) eventIdEl.textContent = "Solana Devnet · Demo Event ID: " + id;
-  if(eventEl) eventEl.classList.add("show");
-
-  toast("✓ Blockchain event prepared.");
-}
-
-/* PHANTOM WALLET */
-let phantomProvider = null;
-
-function getPhantomProvider(){
-  if(window.phantom && window.phantom.solana){
-    return window.phantom.solana;
-  }
-  if(window.solana && window.solana.isPhantom){
-    return window.solana;
-  }
-  return null;
-}
-
-function shortAddress(address){
-  if(!address) return "";
-  return address.slice(0, 6) + "..." + address.slice(-6);
-}
-
-function setWalletConnected(address){
-  const button = document.getElementById("connectWalletBtn");
-  const wallet = document.getElementById("walletAddress");
-
-  if(!button || !wallet) return;
-
-  wallet.style.display = "inline-flex";
-  wallet.textContent = shortAddress(address);
-  button.textContent = "Disconnect";
-}
-
-function setWalletDisconnected(){
-  const button = document.getElementById("connectWalletBtn");
-  const wallet = document.getElementById("walletAddress");
-
-  if(!button || !wallet) return;
-
-  wallet.style.display = "none";
-  wallet.textContent = "Not connected";
-  button.textContent = "Connect Phantom";
-}
-
-async function connectPhantom(){
-  phantomProvider = getPhantomProvider();
-
-  if(!phantomProvider){
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    if(isMobile){
-      const phantomBrowseUrl =
-        "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href);
-      window.location.href = phantomBrowseUrl;
-      return;
+function getPhantom() {
+    if (window.solana && window.solana.isPhantom) {
+        return window.solana;
     }
 
-    window.open("https://phantom.app/download", "_blank", "noopener,noreferrer");
-    toast("Opening Phantom download...");
-    return;
-  }
-
-  try{
-    const response = await phantomProvider.connect();
-    const publicKey = response?.publicKey || phantomProvider.publicKey;
-
-    if(!publicKey){
-      throw new Error("Phantom connected but public key was not returned.");
+    if (window.phantom?.solana?.isPhantom) {
+        return window.phantom.solana;
     }
 
-    const address = publicKey.toString();
-    localStorage.setItem("payproof_wallet", address);
-    setWalletConnected(address);
-    toast("✓ Phantom connected");
-  } catch(error){
-    console.error("Phantom connection error:", error);
-    if(error?.code === 4001){
-      toast("Connection cancelled in Phantom.");
-    } else {
-      toast("Could not connect to Phantom.");
-    }
-  }
+    return null;
 }
 
-async function disconnectPhantom(){
-  if(!phantomProvider) return;
+async function connectWallet() {
+    const provider = getPhantom();
 
-  try{
-    await phantomProvider.disconnect();
-  } catch(error){
-    console.error("Phantom disconnect error:", error);
-  }
+    if (!provider) {
+        alert("Phantom wallet is not installed.");
+        return;
+    }
 
-  setWalletDisconnected();
+    try {
+        const response = await provider.connect();
+        walletAddress = response.publicKey.toString();
+
+        updateWalletUI();
+
+        console.log("Phantom connected:", walletAddress);
+        console.log("PayProof Program ID:", PROGRAM_ID);
+        console.log("Network: Solana Devnet");
+    } catch (error) {
+        console.error("Wallet connection failed:", error);
+    }
 }
 
-function setupPhantom(){
-  phantomProvider = getPhantomProvider();
+async function disconnectWallet() {
+    const provider = getPhantom();
 
-  if(!phantomProvider){
-    return;
-  }
-
-  if(phantomProvider.isConnected && phantomProvider.publicKey){
-    setWalletConnected(phantomProvider.publicKey.toString());
-  }
-
-  phantomProvider.on?.("connect", (publicKey) => {
-    if(publicKey){
-      setWalletConnected(publicKey.toString());
+    if (provider) {
+        try {
+            await provider.disconnect();
+        } catch (error) {
+            console.error(error);
+        }
     }
-  });
 
-  phantomProvider.on?.("disconnect", () => {
-    setWalletDisconnected();
-  });
-
-  phantomProvider.on?.("accountChanged", (publicKey) => {
-    if(publicKey){
-      setWalletConnected(publicKey.toString());
-    } else {
-      setWalletDisconnected();
-    }
-  });
+    walletAddress = null;
+    updateWalletUI();
 }
 
-document.getElementById("connectWalletBtn")?.addEventListener("click", async () => {
-  phantomProvider = getPhantomProvider();
+function updateWalletUI() {
+    const buttons = document.querySelectorAll(
+        "#connectWallet, #connect-wallet, .connect-wallet, [data-connect-wallet]"
+    );
 
-  if(phantomProvider?.isConnected || phantomProvider?.publicKey){
-    await disconnectPhantom();
-  } else {
-    await connectPhantom();
-  }
+    buttons.forEach((button) => {
+        if (walletAddress) {
+            button.textContent =
+                walletAddress.slice(0, 4) +
+                "..." +
+                walletAddress.slice(-4);
+
+            button.onclick = disconnectWallet;
+        } else {
+            button.textContent = "Connect Phantom";
+            button.onclick = connectWallet;
+        }
+    });
+}
+
+async function checkProgram() {
+    try {
+        const response = await fetch(DEVNET_RPC, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                jsonrpc: "2.0",
+                id: 1,
+                method: "getAccountInfo",
+                params: [
+                    PROGRAM_ID,
+                    {
+                        encoding: "base64"
+                    }
+                ]
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.result?.value) {
+            console.log("✅ PayProof program found on Solana Devnet.");
+            console.log("Program ID:", PROGRAM_ID);
+            return true;
+        }
+
+        console.warn("PayProof program was not found.");
+        return false;
+    } catch (error) {
+        console.error("Devnet connection error:", error);
+        return false;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateWalletUI();
+    checkProgram();
+
+    document.querySelectorAll(
+        "#connectWallet, #connect-wallet, .connect-wallet, [data-connect-wallet]"
+    ).forEach((button) => {
+        button.addEventListener("click", connectWallet);
+    });
 });
 
-window.addEventListener("load", () => {
-  setupPhantom();
-  setTimeout(setupPhantom, 300);
-  setTimeout(setupPhantom, 1000);
-});
-
-/* INITIALIZE */
-updateAnalytics();
+window.PayProof = {
+    programId: PROGRAM_ID,
+    network: "devnet",
+    connectWallet,
+    disconnectWallet,
+    checkProgram
+};
