@@ -157,21 +157,18 @@ Accounting analytics · Reports · Payment integrations · Business dashboard
 
 
 ✦ Submission
-Pitch
-Watch Pitch Video
-Demo
-Watch Demo Video
-Presentation
-Open Presentation
+Watch Pitch Video https://youtu.be/8oBv9BfQUGw?si=XQkDHe-DtUkPFUTO
+Watch Demo Video https://youtube.com/shorts/9FC9NCuPhs0?si=wECl5Yk96K05hyX4
+Presentation https://drive.google.com/file/u/0/d/17vYTGIReccOkHP94adpzW5v4eC5NnjfP/view?usp=drive_link&utm_source=chatgpt.com&pli=1
 
 
 ⸻
 
 
 ✦ Links
-Live Demo
-GitHub Repository
-Solana Devnet Program
+Live Demo https://payproof-mvp.vercel.app
+GitHub Repository https://github.com/danya-maker/payproof-mvp
+Solana Devnet Program https://explorer.solana.com/address/EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p?cluster=devnet&utm_source=chatgpt.com
 
 
 ⸻
