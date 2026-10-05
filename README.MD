@@ -6,7 +6,6 @@ Live Demo · GitHub · Solana Program
 </div>
 
 
-⸻
 
 
 <p align="center">
