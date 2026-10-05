@@ -1,8 +1,8 @@
 [programs.devnet]
-payproof = "EJKAW3jKPKDFUw3b0gVvJMnhY21CR9qg7a8nqaZrZM7p"
+payproof = "declare_id!(EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p);"
 
 [provider]
 cluster = "devnet"
 
 [programs.localnet]
-payproof = "EJKAW3jKPKDFUw3b0gVvJMnhY21CR9qg7a8nqaZrZM7p"
+payproof = "declare_id!(EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p);"
