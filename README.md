@@ -6,7 +6,7 @@ Live Demo · GitHub · Solana Program
 </div>
 
    
- 
+ ____
 
 <p align="center">
   <img src="docs/payproof-overview.png" alt="PayProof overview" width="900">
