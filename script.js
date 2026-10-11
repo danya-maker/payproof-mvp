@@ -1,5 +1,6 @@
-const PROGRAM_ID = "EJKAW3jKPKDFUw3b0gVvJMnhY21CR9qg7a8nqaZrZM7p";
+const PROGRAM_ID = "EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p";
 const DEVNET_RPC = "https://api.devnet.solana.com";
+const WALLET_BUTTON_SELECTOR = "#connectWalletBtn, #connectWallet, #connect-wallet, .connect-wallet, [data-connect-wallet]";
 
 let walletAddress = null;
 
@@ -34,6 +35,7 @@ async function connectWallet() {
         console.log("Network: Solana Devnet");
     } catch (error) {
         console.error("Wallet connection failed:", error);
+        alert("Wallet connection failed. Please approve the connection in Phantom and try again.");
     }
 }
 
@@ -44,7 +46,7 @@ async function disconnectWallet() {
         try {
             await provider.disconnect();
         } catch (error) {
-            console.error(error);
+            console.error("Disconnect failed:", error);
         }
     }
 
@@ -53,21 +55,19 @@ async function disconnectWallet() {
 }
 
 function updateWalletUI() {
-    const buttons = document.querySelectorAll(
-        "#connectWallet, #connect-wallet, .connect-wallet, [data-connect-wallet]"
-    );
+    const buttons = document.querySelectorAll(WALLET_BUTTON_SELECTOR);
 
     buttons.forEach((button) => {
-        if (walletAddress) {
-            button.textContent =
-                walletAddress.slice(0, 4) +
-                "..." +
-                walletAddress.slice(-4);
+        if (!button) return;
 
+        if (walletAddress) {
+            button.textContent = walletAddress.slice(0, 4) + "..." + walletAddress.slice(-4);
             button.onclick = disconnectWallet;
+            button.setAttribute("aria-label", "Disconnect wallet");
         } else {
             button.textContent = "Connect Phantom";
             button.onclick = connectWallet;
+            button.setAttribute("aria-label", "Connect Phantom");
         }
     });
 }
@@ -112,10 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
     updateWalletUI();
     checkProgram();
 
-    document.querySelectorAll(
-        "#connectWallet, #connect-wallet, .connect-wallet, [data-connect-wallet]"
-    ).forEach((button) => {
-        button.addEventListener("click", connectWallet);
+    document.querySelectorAll(WALLET_BUTTON_SELECTOR).forEach((button) => {
+        button.addEventListener("click", () => {
+            if (walletAddress) {
+                disconnectWallet();
+            } else {
+                connectWallet();
+            }
+        });
     });
 });
 
