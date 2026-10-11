@@ -4,6 +4,7 @@
   "private": true,
   "description": "Salary payment tracking MVP with Solana integration",
   "scripts": {
-    "check": "node scripts/check-program.js"
+    "check": "cargo check --manifest-path programs/payproof/Cargo.toml",
+    "test": "cargo test --manifest-path programs/payproof/Cargo.toml"
   }
 }
