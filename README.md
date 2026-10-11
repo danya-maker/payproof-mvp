@@ -1,87 +1,134 @@
-PayProof — Every payment. Proven.
-Transparent salary tracking for employees and small businesses, built with Solana in mind.
-Live Demo · Video Demo · GitHub Repository · Colosseum Project
+#  PayProof
+### Every payment. Proven.
 
+Salary transparency for employees and small businesses — built with Solana.
 
-⸻
+<p align="center">
+  <a href="https://payproof-mvp.vercel.app/">
+    <img src="https://img.shields.io/badge/Live_Demo-Visit_PayProof-9945FF?style=for-the-badge" alt="Live Demo">
+  </a>
+  <a href="https://youtube.com/shorts/9FC9NCuPhs0">
+    <img src="https://img.shields.io/badge/▶_Video_Demo-Watch-111827?style=for-the-badge" alt="Video Demo">
+  </a>
+  <a href="https://colosseum.com/arena/projects/payproof">
+    <img src="https://img.shields.io/badge/Colosseum-Hackathon_Project-14F195?style=for-the-badge" alt="Colosseum Project">
+  </a>
+</p>
 
+<p align="center">
+  <img src="docs/payproof-overview.png" alt="PayProof Dashboard" width="100%">
+</p>
 
+<p align="center">
+  <strong>Track salaries. Monitor delays. Build trust.</strong>
+</p>
 
+---
 
-⸻
+##  About the Project
 
+Salary information is often scattered across messages, screenshots, and spreadsheets. Repeated payment delays can be difficult to track and document.
 
-Submission & Contact
-2026 Solana National Hackathon
-Founder & Developer: Rayana
-Colosseum Project: PayProof
-Telegram: @runmein
-The Problem
-Salary information is often scattered across messages, screenshots, and spreadsheets. Repeated payment delays can be difficult to track, document, and understand.
-The Solution
-PayProof brings salary payment records into one dashboard, helping employees and small businesses organize payment history, monitor delays, and explore payment patterns.
-Key Features
-Payment Dashboard — view salary payment records in one place.
-Payment History — review payment amounts, dates, and statuses.
-Delay Monitoring — track delayed payments and identify recurring patterns.
-Analytics — explore payment history through dashboard statistics.
-Solana Integration Foundation — an Anchor program deployed to Solana Devnet, providing a foundation for future on-chain payment records.
-Demo
-Explore the live prototype and see how PayProof organizes salary payment information.
-Live Application: payproof-mvp.vercel.app
-Video Walkthrough: Watch on YouTube
-Hackathon Submission: View PayProof on Colosseum
+PayProof brings salary payment records into one dashboard, helping employees and small businesses organize payment history, monitor delays, and understand payment patterns.
+
+## 🚀 Key Features
+
+| Feature | Description |
+|---|---|
+| 📊 Dashboard | View payment records and key statistics |
+| 🧾 Payment History | Review payment amounts, dates, and statuses |
+| ⏰ Delay Monitoring | Track delays and identify recurring patterns |
+| 📈 Analytics | Explore payment history through dashboard statistics |
+| 🔗 Solana Foundation | Anchor program deployed to Solana Devnet |
+
+## 🎬 Try PayProof
+
+<p align="center">
+  <a href="https://payproof-mvp.vercel.app/">
+    <strong>🌐 OPEN LIVE DEMO</strong>
+  </a>
+  &nbsp; · &nbsp;
+  <a href="https://youtube.com/shorts/9FC9NCuPhs0">
+    <strong>▶ WATCH VIDEO</strong>
+  </a>
+</p>
+
 The prototype uses sample payment data to demonstrate the user experience.
-Solana Program
+
+## ⛓️ Solana Devnet
+
 PayProof includes an Anchor program deployed to Solana Devnet.
-Network: Solana Devnet
-Program ID: EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p
-Solana Explorer: View deployed program
-Prototype status: The website currently uses sample payment data. Although the Anchor program is deployed, the frontend does not yet submit or verify real salary-payment transactions on-chain. Displayed balances are illustrative demo data, not real financial information.
-Why Solana?
-Low transaction costs can make payment-record verification practical.
-Fast confirmation can support responsive payment-record workflows.
-Anchor framework provides a foundation for developing Solana programs in Rust.
-Future verifiability could help employees and businesses independently verify recorded payment events.
-These are the benefits PayProof aims to build on as the prototype develops.
-Tech Stack
-Layer
-Technology
-Frontend
-HTML, CSS, JavaScript
-On-chain Program
-Rust, Anchor
-Blockchain Network
-Solana Devnet
-Hosting
-Vercel
-Architecture
+
+| Detail | Value |
+|---|---|
+| Network | Solana Devnet |
+| Framework | Anchor |
+| Language | Rust |
+| Program ID | EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p |
+
+[View Program on Solana Explorer →](https://explorer.solana.com/address/EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p?cluster=devnet)
+
+> Prototype status: The website currently uses sample payment data. The deployed Anchor program is not yet connected to the frontend for real on-chain salary-payment recording or verification. Displayed balances are illustrative and do not represent real funds.
+
+## 💡 Why Solana?
+
+- Low fees — a potential fit for recording individual payment events.
+- Fast confirmation — supports responsive transaction workflows.
+- Anchor framework — provides tools for building Solana programs in Rust.
+- Verifiability — future on-chain records could help users independently verify payment events.
+
+These are the capabilities PayProof aims to build on as development continues.
+
+##  Tech Stack
+
+<p>
+  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-E34F26?style=flat-square" alt="Frontend">
+  <img src="https://img.shields.io/badge/Smart_Contract-Rust%20%7C%20Anchor-9945FF?style=flat-square" alt="Smart Contract">
+  <img src="https://img.shields.io/badge/Network-Solana_Devnet-14F195?style=flat-square" alt="Solana Devnet">
+  <img src="https://img.shields.io/badge/Hosting-Vercel-111111?style=flat-square" alt="Vercel">
+</p>
+
+##  Architecture
+
 PayProof consists of two main components:
-Frontend: a dashboard for viewing payment records, monitoring delays, and exploring analytics.
-Solana Program: a deployed Anchor program intended to support future on-chain payment-record functionality.
-The connection between the frontend and on-chain recording remains future work.
-See the Architecture Documentation.
-Repository Structure
-index.html — web application interface.
-programs/payproof/ — Anchor program source code.
-Anchor.toml — Anchor project configuration.
-Cargo.toml — Rust project configuration.
-docs/ — project documentation and architecture.
-.github/workflows/build.yml — automated build workflow.
-Getting Started
-Run the Frontend
-Clone the repository:
-git clone https://github.com/danya-maker/payproof-mvp.git
-cd payproof-mvp
-Open index.html in your browser, or use a local static web server.
-Alternatively, visit the live demo.
-On-Chain Development
-The Anchor program has its own Rust and Solana development requirements. See the project configuration files and the Solana documentation before building or deploying it.
-Roadmap
-☐ Connect the frontend to the deployed Anchor program.
-☐ Implement and test on-chain payment recording.
-☐ Add transaction confirmation and verification links.
-☐ Improve wallet connection and error handling.
-☐ Expand automated tests and validation.
-License
-This project is licensed under the MIT License. See LICENSE.
+
+1. Frontend — dashboard, payment history, delay monitoring, and analytics.
+2. Solana program — deployed Anchor program intended to support future on-chain payment records.
+
+The frontend-to-program integration remains future work.
+
+📖 [Read the Architecture Documentation](docs/architecture.md)
+
+##  Repository Structure
+payproof-mvp/
+├── .github/
+│   └── workflows/
+│       └── build.yml
+├── docs/
+│   ├── architecture.md
+│   └── payproof-overview.png
+├── programs/
+│   └── payproof/
+├── Anchor.toml
+├── Cargo.toml
+├── index.html
+├── LICENSE
+└── README.md ##  Roadmap
+
+- [ ] Connect the frontend to the deployed Anchor program.
+- [ ] Implement and test on-chain payment recording.
+- [ ] Add transaction confirmation and verification links.
+- [ ] Improve wallet connection and error handling.
+- [ ] Expand automated tests and validation.
+
+## 🏆 Hackathon & Contact
+
+2026 Solana National Hackathon
+
+- Founder & Developer: Rayana
+- Colosseum Project: [PayProof](https://colosseum.com/arena/projects/payproof)
+- Telegram: [@runmein](https://t.me/runmein)
+
+## 📄 License
+
+Released under the MIT License. See [LICENSE](LICENSE).
