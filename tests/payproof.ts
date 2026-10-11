@@ -4,18 +4,27 @@ describe("PayProof", () => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  it("Program is deployed", async () => {
-    const programId = new anchor.web3.PublicKey(
-      "declare_id!("EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p");"
+  it("initializes the program", async () => {
+    const program = anchor.workspace.Payproof as anchor.Program<any>;
+
+    const [newAccount] = anchor.web3.PublicKey.findProgramAddressSync(
+      [Buffer.from("payproof"), provider.wallet.publicKey.toBuffer()],
+      program.programId
     );
 
-    const accountInfo = await provider.connection.getAccountInfo(programId);
+    await program.methods
+      .initialize(new anchor.BN(42))
+      .accounts({
+        newAccount,
+        signer: provider.wallet.publicKey,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      })
+      .rpc();
 
-    if (!accountInfo) {
-      throw new Error("PayProof program not found on Devnet");
+    const account = await program.account.newAccount.fetch(newAccount);
+    console.log("Stored data:", account.data.toString());
+    if (account.data.toNumber() !== 42) {
+      throw new Error("Initialization failed: account data mismatch");
     }
-
-    console.log("PayProof program is deployed on Devnet!");
-    console.log("Program ID:", programId.toString());
   });
 });
