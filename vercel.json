@@ -3,8 +3,6 @@
   "version": 2,
   "framework": "other",
   "outputDirectory": ".",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
   "cleanUrls": true,
   "trailingSlash": false
 }
