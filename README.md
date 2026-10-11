@@ -100,19 +100,17 @@ The frontend-to-program integration remains future work.
 
 ##  Repository Structure
 payproof-mvp/
-├── .github/
-│   └── workflows/
-│       └── build.yml
-├── docs/
-│   ├── architecture.md
-│   └── payproof-overview.png
-├── programs/
-│   └── payproof/
-├── Anchor.toml
-├── Cargo.toml
-├── index.html
-├── LICENSE
-└── README.md ##  Roadmap
+ .github/   workflows/
+      build.yml
+docs/
+ architecture.md  payproof-overview.png
+programs/
+ payproof/
+ Anchor.toml
+ Cargo.toml
+index.html
+LICENSE
+ README.md ##  Roadmap
 
 - [ ] Connect the frontend to the deployed Anchor program.
 - [ ] Implement and test on-chain payment recording.
