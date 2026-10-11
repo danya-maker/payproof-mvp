@@ -1,8 +1,6 @@
 use anchor_lang::prelude::*;
 
-// Use a valid base58 program ID. The previous value was invalid and caused
-// the Anchor build to fail with `failed to decode base58 string`.
-declare_id!("1111111111111111111111111111111111111111111111111111111111111111");
+declare_id!("EJkAW3jKPKDFUw3bGgVvJMnhY21CR9qg7a8nqaZrZM7p");
 
 #[program]
 pub mod payproof {
