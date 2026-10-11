@@ -1,0 +1,22 @@
+# Rust / Anchor
+/target/
+**/target/
+
+# Node / frontend
+node_modules/
+.npm/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Vercel / build output
+.vercel/
+.next/
