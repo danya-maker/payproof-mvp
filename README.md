@@ -40,7 +40,7 @@ PayProof brings salary payment records into one dashboard, helping employees and
 |  Delay Monitoring | Track delays and identify recurring patterns |
 |  Analytics | Explore payment history through dashboard statistics |
 |  Solana Foundation | Anchor program deployed to Solana Devnet 
-## 🎬 Try PayProof
+## Try PayProof
 
 <p align="center">
   <a href="https://payproof-mvp.vercel.app/">
@@ -54,7 +54,7 @@ PayProof brings salary payment records into one dashboard, helping employees and
 
 The prototype uses sample payment data to demonstrate the user experience.
 
-## ⛓️ Solana Devnet
+##  Solana Devnet
 
 PayProof includes an Anchor program deployed to Solana Devnet.
 
