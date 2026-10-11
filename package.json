@@ -1,11 +1,7 @@
 {
   "name": "payproof",
-  "version": "1.0.0",
   "private": true,
-  "description": "Salary payment tracking MVP with Solana integration",
   "scripts": {
-    "check": "cargo check --manifest-path programs/payproof/Cargo.toml",
-    "build": "cargo build --manifest-path programs/payproof/Cargo.toml",
-    "test": "cargo test --manifest-path programs/payproof/Cargo.toml"
+    "build": "mkdir -p public && cp index.html public/index.html && cp style.css public/style.css && cp script.js public/script.js"
   }
 }
