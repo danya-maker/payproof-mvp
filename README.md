@@ -3,6 +3,10 @@
 
 Salary transparency for employees and small businesses — built with Solana.
 
+> ⚠️ Project Status: Prototype / MVP demo
+>
+> PayProof is currently a working frontend prototype using sample salary-payment data to demonstrate the experience and product vision. The Solana Anchor program exists and is deployed to Devnet, but the frontend-to-chain integration is still in progress. Real on-chain payment recording and verification are planned for Phase 2.
+
 <p align="center">
   <a href="https://payproof-mvp.vercel.app/">
     <img src="https://img.shields.io/badge/Live_Demo-Visit_PayProof-9945FF?style=for-the-badge" alt="Live Demo">
@@ -35,11 +39,12 @@ PayProof brings salary payment records into one dashboard, helping employees and
 
 | Feature | Description |
 |---|---|
-|  Dashboard | View payment records and key statistics |
-|  Payment History | Review payment amounts, dates, and statuses |
-|  Delay Monitoring | Track delays and identify recurring patterns |
-|  Analytics | Explore payment history through dashboard statistics |
-|  Solana Foundation | Anchor program deployed to Solana Devnet 
+| Dashboard | View payment records and key statistics |
+| Payment History | Review payment amounts, dates, and statuses |
+| Delay Monitoring | Track delays and identify recurring patterns |
+| Analytics | Explore payment history through dashboard statistics |
+| Solana Foundation | Anchor program deployed to Solana Devnet |
+
 ## Try PayProof
 
 <p align="center">
@@ -67,7 +72,7 @@ PayProof includes an Anchor program deployed to Solana Devnet.
 
 [View Program on Solana Explorer →](https://explorer.solana.com/address/EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p?cluster=devnet)
 
-> Prototype status: The website currently uses sample payment data. The deployed Anchor program is not yet connected to the frontend for real on-chain salary-payment recording or verification. Displayed balances are illustrative and do not represent real funds.
+> Prototype status: The website currently uses sample payment data. The deployed Anchor program is not yet connected to the frontend for real on-chain salary-payment recording or verification.
 
 ##  Why Solana?
 
@@ -99,18 +104,34 @@ The frontend-to-program integration remains future work.
 📖 [Read the Architecture Documentation](docs/architecture.md)
 
 ##  Repository Structure
+
+```text
 payproof-mvp/
- .github/   workflows/
-      build.yml
-docs/
- architecture.md  payproof-overview.png
-programs/
- payproof/
- Anchor.toml
- Cargo.toml
-index.html
-LICENSE
- README.md ##  Roadmap
+├── .github/
+│   └── workflows/
+│       └── build.yml
+├── docs/
+│   ├── architecture.md
+│   └── payproof-overview.png
+├── programs/
+│   └── payproof/
+│       ├── src/
+│       ├── Cargo.toml
+│       └── ...
+├── .gitignore
+├── Anchor.toml
+├── Cargo.toml
+├── LICENSE
+├── README.md
+├── index.html
+├── package.json
+├── script.js
+├── style.css
+└── tests/
+    └── payproof.ts
+```
+
+##  Roadmap
 
 - [ ] Connect the frontend to the deployed Anchor program.
 - [ ] Implement and test on-chain payment recording.
