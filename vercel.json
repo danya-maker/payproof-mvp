@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "buildCommand": "cargo build --manifest-path programs/payproof/Cargo.toml",
+  "outputDirectory": "programs/payproof/target/debug",
+  "framework": "other"
+}
