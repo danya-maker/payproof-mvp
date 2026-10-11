@@ -9,5 +9,4 @@ crate-type = ["cdylib", "lib"]
 name = "payproof"
 
 [dependencies]
-anchor-lang = "0.31.1"
- 
+anchor-lang = "0.31.2"
