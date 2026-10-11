@@ -5,4 +5,4 @@ payproof = "declare_id!(EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p);"
 cluster = "devnet"
 
 [programs.localnet]
-payproof = "declare_id!(EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p);"
+payproof = "declare_id!(EJkAW3JKPKDFUw3b6gVvJMnhY21CR9qg7a8nqaZrZM7p);" 
