@@ -5,14 +5,14 @@ Salary transparency for employees and small businesses — built with Solana.
 
 > ⚠️ Project Status: Prototype / MVP demo
 >
-> PayProof is currently a working frontend prototype using sample salary-payment data to demonstrate the experience and product vision. The Solana Anchor program exists and is deployed to Devnet, but the frontend-to-chain integration is still in progress. Real on-chain payment recording and verification are planned for Phase 2.
+> PayProof is currently a working frontend prototype using sample salary-payment data to demonstrate the product vision. The Solana Anchor program exists and is deployed to Devnet, but the frontend-to-chain integration is still in progress. Real on-chain salary recording and verification are planned for Phase 2.
 
 <p align="center">
   <a href="https://payproof-mvp.vercel.app/">
     <img src="https://img.shields.io/badge/Live_Demo-Visit_PayProof-9945FF?style=for-the-badge" alt="Live Demo">
   </a>
   <a href="https://youtube.com/shorts/9FC9NCuPhs0">
-    <img src="https://img.shields.io/badge/▶_Video_Demo-Watch-111827?style=for-the-badge" alt="Video Demo">
+    <img src="https://img.shields.io/badge/▶_Video_Demo-Watch_111827?style=for-the-badge" alt="Video Demo">
   </a>
   <a href="https://colosseum.com/arena/projects/payproof">
     <img src="https://img.shields.io/badge/Colosseum-Hackathon_Project-14F195?style=for-the-badge" alt="Colosseum Project">
