@@ -22,7 +22,7 @@ describe("PayProof", () => {
       .rpc();
 
     const account = await program.account.newAccount.fetch(newAccount);
-    console.log("Stored data:", account.data.toString());
+
     if (account.data.toNumber() !== 42) {
       throw new Error("Initialization failed: account data mismatch");
     }
