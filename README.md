@@ -3,7 +3,7 @@
 
 Salary transparency for employees and small businesses — built with Solana.
 
-> ⚠️ Project Status: Prototype / MVP demo
+>  Project Status: Prototype / MVP demo
 >
 > PayProof is currently a working frontend prototype using sample salary-payment data to demonstrate the product vision. The Solana Anchor program exists and is deployed to Devnet, but the frontend-to-chain integration is still in progress. Real on-chain salary recording and verification are planned for Phase 2.
 
