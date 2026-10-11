@@ -31,16 +31,15 @@ Salary information is often scattered across messages, screenshots, and spreadsh
 
 PayProof brings salary payment records into one dashboard, helping employees and small businesses organize payment history, monitor delays, and understand payment patterns.
 
-## 🚀 Key Features
+##  Key Features
 
 | Feature | Description |
 |---|---|
-| 📊 Dashboard | View payment records and key statistics |
-| 🧾 Payment History | Review payment amounts, dates, and statuses |
-| ⏰ Delay Monitoring | Track delays and identify recurring patterns |
-| 📈 Analytics | Explore payment history through dashboard statistics |
-| 🔗 Solana Foundation | Anchor program deployed to Solana Devnet |
-
+|  Dashboard | View payment records and key statistics |
+|  Payment History | Review payment amounts, dates, and statuses |
+|  Delay Monitoring | Track delays and identify recurring patterns |
+|  Analytics | Explore payment history through dashboard statistics |
+|  Solana Foundation | Anchor program deployed to Solana Devnet 
 ## 🎬 Try PayProof
 
 <p align="center">
@@ -70,7 +69,7 @@ PayProof includes an Anchor program deployed to Solana Devnet.
 
 > Prototype status: The website currently uses sample payment data. The deployed Anchor program is not yet connected to the frontend for real on-chain salary-payment recording or verification. Displayed balances are illustrative and do not represent real funds.
 
-## 💡 Why Solana?
+##  Why Solana?
 
 - Low fees — a potential fit for recording individual payment events.
 - Fast confirmation — supports responsive transaction workflows.
@@ -121,7 +120,7 @@ payproof-mvp/
 - [ ] Improve wallet connection and error handling.
 - [ ] Expand automated tests and validation.
 
-## 🏆 Hackathon & Contact
+##  Hackathon & Contact
 
 2026 Solana National Hackathon
 
