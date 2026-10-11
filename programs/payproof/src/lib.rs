@@ -7,7 +7,8 @@ pub mod payproof {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>, data: u64) -> Result<()> {
-        ctx.accounts.new_account.data = data;
+        let account = &mut ctx.accounts.new_account;
+        account.data = data;
         msg!("PayProof initialized with data: {}!", data);
         Ok(())
     }
